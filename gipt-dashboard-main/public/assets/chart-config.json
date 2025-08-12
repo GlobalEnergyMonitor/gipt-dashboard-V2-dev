@@ -1,0 +1,97 @@
+{
+    "23631837": {
+        "title": "How has power capacity changed over time?",
+        "subtitle": "Total operating power capacity by year since 2000, in gigawatts (GW)",
+        "x_axis": "Year",
+        "values": [
+            "Coal","Oil and gas","Hydropower","Nuclear","Utility-scale solar",	"Wind",	"Bioenergy",	"Geothermal"
+        ],
+        "dataset": "stacked_capv4",
+        "initial_state": "World",
+        "filterable": true,
+        "filter_by": "Country"
+    },
+        "18923725": {
+        "title": "How much power capacity is in development?",
+        "subtitle": "Power capacity in development by source and status, in gigawatts (GW)",
+        "x_axis": "Source",
+        "values": [
+            "Construction", "Pre-construction", "Announced"],
+        "dataset": "gipt_development_apr2025_v1",
+        "initial_state": "World",
+        "filterable": true,
+        "filter_by": "Country"
+    },
+    "18930420": {
+        "title": "How does power capacity break down by status?",
+        "subtitle": "Proportion (%) of power capacity by type and status",
+        "x_axis": "Status",
+        "values": [
+            "Non-fossil", "Fossil"
+        ],
+        "dataset": "gipt_fossil_nonfossil_apr2025_v1",
+        "initial_state": "World",
+        "filterable": true,
+        "filter_by": "Country"
+    },
+    "23191160": {
+        "title": "Who owns operating power facilities?",
+        "subtitle": "Circles show operating capacity per parent/owner entity, in gigawatts (GW)",
+        "x_axis": "Parent entity",
+        "values": [
+            "Type"
+        ],
+        "dataset": "ownership_dash1",
+        "initial_state": "World",
+        "filterable": true,
+        "filter_by": "Country",
+        "template": "@flourish/hierarchy"
+    },
+        "23167995": {
+        "title": "What is the age breakdown of power capacity?",
+        "subtitle": "Power capacity by age and technology, in gigawatts (GW)",
+        "x_axis": "Age Category",
+        "values": [
+            "Coal","Oil & gas","Hydro","Nuclear","Utility-scale solar",	"Wind",	"Bioenergy",	"Geothermal"
+        ],
+        "dataset": "age_dashboard_v1",
+        "initial_state": "World",
+        "filterable": true,
+        "filter_by": "Country"
+    },
+    "23183975": {
+        "title": "How much power capacity has been added and retired?",
+        "subtitle": "Power capacity added and retired each year since 2000 by source, in gigawatts (GW)",
+        "x_axis": "year",
+        "values": [
+            "Net fossil","Net non-fossil","Coal", "Oil/gas", "Utility-scale solar", "Wind", "Nuclear", "Hydro", "Bioenergy", "Geothermal","Coal retired", "Oil/gas retired", "Utility-scale solar retired", "Wind retired", "Nuclear retired", "Hydro retired", "Bioenergy retired", "Geothermal retired"
+        ],
+        "dataset": "net_capacity_v2",
+        "initial_state": "World",
+        "filterable": true,
+        "filter_by": "Country"
+    },
+    "23185423": {
+        "title": "When is power capacity in development due to come online?",
+        "subtitle": "Power capacity in development by source and status, in gigawatts (GW)",
+        "x_axis": "Type",
+        "values": [
+            "Status","Starts"
+        ],
+        "dataset": "start_year_v1",
+        "initial_state": "World",
+        "filterable": true,
+        "filter_by": "Country",
+        "template": "@flourish/hierarchy"
+    },
+    "24167887": {
+    "title": "",
+    "subtitle": "",
+    "dataset": "operating_plants_map",
+    "initial_state": "World",
+    "filterable": false,
+    "filter_by": "Country/area",
+    "template": "@flourish/time-map"
+}
+}
+

@@ -1,0 +1,36 @@
+{
+    "flourish_ids": [
+        "24167887",
+        "23631837",
+        "23183975",
+        "18923725",
+        "23167995",
+        "23191160",
+        "23185423"   
+        
+    ],
+    "input_type": "dropdown",
+    "input_filter": "Country",
+    "input_default": "World",
+    "overall_summary": true,
+    "ticker_text_font-size": "1.75rem",
+    "ticker_data": "gipt_data_ticker_apr2025_v1",
+    "tickers": [{
+        "id": "summary_1",
+        "decimal_places": 2,
+        "style": {
+            "color": "#5f9e79",
+            "font-weight": "bold",
+            "font-size": "3rem"
+        }
+    },
+    {
+        "id": "summary_2",
+        "decimal_places": 2,
+        "style": {
+            "color": "#BF532C",
+            "font-weight": "bold",
+            "font-size": "3rem"
+        }
+    }]
+}
