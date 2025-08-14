@@ -252,3 +252,23 @@ body {
     display: block;
     border: none;
 }
+/* Force single-column layout for all charts */
+.flourish-container {
+  display: flex;
+  flex-direction: column !important;
+  align-items: center;
+}
+
+/* Default width for all charts */
+.chart-container {
+  width: 100%;
+  max-width: 800px;      /* limit width for all except first */
+  margin: 0 0 1.5rem !important;
+  flex: 0 0 auto !important;
+}
+
+/* Let the first chart span full width */
+.chart-container:first-of-type {
+  max-width: none;       /* remove the max width limit */
+  width: 100%;           /* span full container width */
+}
