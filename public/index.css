@@ -227,7 +227,7 @@ body {
 /* Only stretch the map iframe */
 #chart-23632161 iframe {
     width: 100% !important;
-    height: auto !important;
+    height: 100% !important;
     display: block;
 }
 /* Place the map chart on its own row, centered */
@@ -248,7 +248,7 @@ body {
 /* Make the map iframe scale nicely */
 #chart-23632161 iframe {
     width: 100% !important;
-    height: 600px !important;
+    height: 700px !important;
     display: block;
     border: none;
 }

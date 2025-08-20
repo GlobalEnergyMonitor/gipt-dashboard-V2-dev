@@ -338,7 +338,7 @@ function implentGraph(id) {
     // Special case for the time-map chart
     if (id === "24167887") {
         const fullData = config.datasets["24167887"];
-        const selected = getSelectedText(); // e.g. "World", "France"
+        const selected = getSelectedText();
 
         const filtered = selected.toLowerCase() === "world"
             ? fullData
@@ -346,39 +346,85 @@ function implentGraph(id) {
                 entry["Country/area"]?.trim().toLowerCase() === selected.trim().toLowerCase()
             );
 
+        const headers = [
+            "Type", "Latitude", "Longitude",
+            "Plant / Project name", "Capacity (MW)", "Technology",
+            "Country/area", "Type", "Capacity (MW)"
+        ];
+
+        const mapped = filtered.map(entry => [
+            entry["Type"],
+            entry["Latitude"],
+            entry["Longitude"],
+            entry["Plant / Project name"],
+            entry["Capacity (MW)"],
+            entry["Technology"],
+            entry["Country/area"],
+            entry["Type"],
+            entry["Capacity (MW)"]
+        ]);
+
         const containerId = `chart-${id}`;
         const container = document.querySelector(`#${containerId}`);
         container.innerHTML = "";
 
+        let bounds;
+
+        if (selected.toLowerCase() === "world") {
+            // 🌍 Fixed global bounds
+            bounds = {
+                lat_min: -25,
+                lat_max: 50,
+                lng_min: -100,
+                lng_max: 100
+            };
+        } else {
+            let latitudes = filtered.map(d => d["Latitude"]).filter(v => typeof v === "number");
+            let longitudes = filtered.map(d => d["Longitude"]).filter(v => typeof v === "number");
+
+            if (latitudes.length === 0 || longitudes.length === 0) {
+                latitudes = [34.5, 71];
+                longitudes = [-25, 40];
+            }
+
+            const pad = 0.5;
+            bounds = {
+                lat_min: Math.min(...latitudes) - pad,
+                lat_max: Math.max(...latitudes) + pad,
+                lng_min: Math.min(...longitudes) - pad,
+                lng_max: Math.max(...longitudes) + pad
+            };
+        }
+
         const chart = new Flourish.Live({
-            base_visualisation_id: "24167887",            // ← your blank Flourish shell ID
-            api_key: "ZkqdL7nzFCQAihbjv-7j0UIm_r3rCCq-IYy4JfCahp9Qs-_dmIGzLn4O_DpcEhiv",                 // API key
+            template: "@flourish/time-map",
             container: `#${containerId}`,
-            overwrite_data: true,
-            //clear_existing_visualisation_data: true,  //  <- this clears out ghost rows
+            api_url: "/flourish",
+            api_key: "ZkqdL7nzFCQAihbjv-7j0UIm_r3rCCq-IYy4JfCahp9Qs-_dmIGzLn4O_DpcEhiv",
+            base_visualisation_id: id,
             state: {
-                categorical_custom_palette: {
-                    "bioenergy": "#71AB5B",
-                    "oil/gas": "#E97777",
-                    "solar": "#FEC260",
-                    "hydro": "#2FA4FF",
-                    "wind": "#B8E1FF",
-                    "nuclear": "#8E44AD",
-                    "coal": "#7F8C8D"
+                map: {
+                    map_initial_bounds_lat_min: bounds.lat_min,
+                    map_initial_bounds_lat_max: bounds.lat_max,
+                    map_initial_bounds_lng_min: bounds.lng_min,
+                    map_initial_bounds_lng_max: bounds.lng_max,
+                    map_initial_type: "bounding_box",
+                    points: { opacity: 60 },
+                    style_base: "flourish-light"
                 }
             },
             bindings: {
                 events: {
-                    color: "Type",
-                    lat: "Latitude",
-                    lon: "Longitude",
-                    metadata: ["Plant / Project name", "Capacity (MW)", "Technology", "Country/area"],
-                    name: "Type",
-                    scale: "Capacity (MW)"
+                    color: 0,
+                    lat: 1,
+                    lon: 2,
+                    metadata: [3, 4, 5, 6],
+                    name: 7,
+                    scale: 8,
                 }
             },
             data: {
-                events: filtered
+                events: [headers, ...mapped]   // 
             }
         });
 
@@ -390,69 +436,69 @@ function implentGraph(id) {
         .then((response) => response.json())
         .then((options) => {
             const data = config.datasets[id];
-// 
-if (options.template === "@flourish/scatter" || (config.charts[id] && config.charts[id].type === "scatter")) {
-  const currentGraph = config.charts[id];
+            // 
+            if (options.template === "@flourish/scatter" || (config.charts[id] && config.charts[id].type === "scatter")) {
+                const currentGraph = config.charts[id];
 
-const filteredData = initialData(id);
+                const filteredData = initialData(id);
 
-  // EXACT headers the vis was authored with (duplicates are intentional)
-  const headers = [
-    "Age Category","Type","Country","Type","Country","Type","Age Category","Capacity (GW)","Capacity %","Capacity %"
-  ];
+                // EXACT headers the vis was authored with (duplicates are intentional)
+                const headers = [
+                    "Age Category", "Type", "Country", "Type", "Country", "Type", "Age Category", "Capacity (GW)", "Capacity %", "Capacity %"
+                ];
 
-  const rows = filteredData.map(d => {
-    // Optional fallback: derive GW if only MW exists
-    const capGW =
-      d["Capacity (GW)"] != null ? d["Capacity (GW)"]
-      : (d["Capacity (MW)"] != null ? Number(d["Capacity (MW)"]) / 1000 : null);
+                const rows = filteredData.map(d => {
+                    // Optional fallback: derive GW if only MW exists
+                    const capGW =
+                        d["Capacity (GW)"] != null ? d["Capacity (GW)"]
+                            : (d["Capacity (MW)"] != null ? Number(d["Capacity (MW)"]) / 1000 : null);
 
-    return [
-      d["Age Category"],         // 0  x
-      d["Type"],                 // 1  color
-      d["Country"],              // 2  filter
-      d["Type"],                 // 3  y
-      d["Country"],              // 4  metadata[0]
-      d["Type"],                 // 5  metadata[1]
-      d["Age Category"],         // 6  metadata[2]
-      capGW,                     // 7  metadata[3]
-      d["Capacity %"],           // 8  metadata[4]
-      d["Capacity %"]            // 9  size
-    ];
-  });
+                    return [
+                        d["Age Category"],         // 0  x
+                        d["Type"],                 // 1  color
+                        d["Country"],              // 2  filter
+                        d["Type"],                 // 3  y
+                        d["Country"],              // 4  metadata[0]
+                        d["Type"],                 // 5  metadata[1]
+                        d["Age Category"],         // 6  metadata[2]
+                        capGW,                     // 7  metadata[3]
+                        d["Capacity %"],           // 8  metadata[4]
+                        d["Capacity %"]            // 9  size
+                    ];
+                });
 
-  graphs[id].opts = {
-    template: "@flourish/scatter",
-    version: "33.4.2",
-    container: `#chart-${id}`,
-    api_url: "/flourish",
-    api_key: "",
-    base_visualisation_id: id,
-    // Use index-based bindings to match the authored vis exactly
-    bindings: {
-      data: {
-        name: [],
-        x: 0,
-        color: 1,
-        filter: 2,
-        y: 3,
-        metadata: [4, 5, 6, 7, 8],
-        size: 9
-      }
-    },
-    data: { data: [headers, ...rows] },
-    // Keep state minimal to avoid referencing missing columns
-    state: {
-      layout: {
-        title: (currentGraph.title || '').replace('{{country}}', ''),
-        subtitle: currentGraph.subtitle || ''
-      }
-    }
-  };
+                graphs[id].opts = {
+                    template: "@flourish/scatter",
+                    version: "33.4.2",
+                    container: `#chart-${id}`,
+                    api_url: "/flourish",
+                    api_key: "",
+                    base_visualisation_id: id,
+                    // Use index-based bindings to match the authored vis exactly
+                    bindings: {
+                        data: {
+                            name: [],
+                            x: 0,
+                            color: 1,
+                            filter: 2,
+                            y: 3,
+                            metadata: [4, 5, 6, 7, 8],
+                            size: 9
+                        }
+                    },
+                    data: { data: [headers, ...rows] },
+                    // Keep state minimal to avoid referencing missing columns
+                    state: {
+                        layout: {
+                            title: (currentGraph.title || '').replace('{{country}}', ''),
+                            subtitle: currentGraph.subtitle || ''
+                        }
+                    }
+                };
 
-  graphs[id].flourish = new Flourish.Live(graphs[id].opts);
-  return;
-}
+                graphs[id].flourish = new Flourish.Live(graphs[id].opts);
+                return;
+            }
 
             const hierarchyCharts = {
                 "23191160": {
@@ -562,19 +608,33 @@ function updateGraphs(key) {
             const container = document.querySelector(`#${containerId}`);
             container.innerHTML = "";
 
-            let latitudes = filtered.map(d => d["Latitude"]).filter(v => typeof v === "number");
-            let longitudes = filtered.map(d => d["Longitude"]).filter(v => typeof v === "number");
-            if (latitudes.length === 0 || longitudes.length === 0) {
-                latitudes = [34.5, 71];
-                longitudes = [-25, 40];
+            let bounds;
+
+            if (selected.toLowerCase() === "world") {
+                // 🌍 Fixed global bounds
+                bounds = {
+                    lat_min: -25,
+                    lat_max: 50,
+                    lng_min: -100,
+                    lng_max: 100
+                };
+            } else {
+                let latitudes = filtered.map(d => d["Latitude"]).filter(v => typeof v === "number");
+                let longitudes = filtered.map(d => d["Longitude"]).filter(v => typeof v === "number");
+
+                if (latitudes.length === 0 || longitudes.length === 0) {
+                    latitudes = [34.5, 71];
+                    longitudes = [-25, 40];
+                }
+
+                const pad = 0.5;
+                bounds = {
+                    lat_min: Math.min(...latitudes) - pad,
+                    lat_max: Math.max(...latitudes) + pad,
+                    lng_min: Math.min(...longitudes) - pad,
+                    lng_max: Math.max(...longitudes) + pad
+                };
             }
-            const pad = 0.5;
-            const bounds = {
-                lat_min: Math.min(...latitudes) - pad,
-                lat_max: Math.max(...latitudes) + pad,
-                lng_min: Math.min(...longitudes) - pad,
-                lng_max: Math.max(...longitudes) + pad
-            };
 
             const chart = new Flourish.Live({
                 template: "@flourish/time-map",
@@ -624,46 +684,46 @@ function updateGraphs(key) {
             }
         }
 
-const isScatter =
-  graphs[id]?.opts?.template === "@flourish/scatter" ||
-  currentGraph?.type === "scatter";
+        const isScatter =
+            graphs[id]?.opts?.template === "@flourish/scatter" ||
+            currentGraph?.type === "scatter";
 
-if (isScatter) {
-  const allData = config.datasets[id];
-  const filterField = currentGraph.filter_by || "Country";
+        if (isScatter) {
+            const allData = config.datasets[id];
+            const filterField = currentGraph.filter_by || "Country";
 
-  
-  const headers = [
-    "Age Category","Type","Country","Type","Country","Type","Age Category","Capacity (GW)","Capacity %","Capacity %"
-  ];
 
-  const rows = filteredData.map(d => {
-    const capGW =
-      d["Capacity (GW)"] != null ? d["Capacity (GW)"]
-      : (d["Capacity (MW)"] != null ? Number(d["Capacity (MW)"]) / 1000 : null);
+            const headers = [
+                "Age Category", "Type", "Country", "Type", "Country", "Type", "Age Category", "Capacity (GW)", "Capacity %", "Capacity %"
+            ];
 
-    return [
-      d["Age Category"],
-      d["Type"],
-      d["Country"],
-      d["Type"],
-      d["Country"],
-      d["Type"],
-      d["Age Category"],
-      capGW,
-      d["Capacity %"],
-      d["Capacity %"]
-    ];
-  });
+            const rows = filteredData.map(d => {
+                const capGW =
+                    d["Capacity (GW)"] != null ? d["Capacity (GW)"]
+                        : (d["Capacity (MW)"] != null ? Number(d["Capacity (MW)"]) / 1000 : null);
 
-  graphs[id].opts.bindings = {
-    data: { name: [], x: 0, color: 1, filter: 2, y: 3, metadata: [4,5,6,7,8], size: 9 }
-  };
-  graphs[id].opts.data = { data: [headers, ...rows] };
-  graphs[id].flourish.update(graphs[id].opts);
+                return [
+                    d["Age Category"],
+                    d["Type"],
+                    d["Country"],
+                    d["Type"],
+                    d["Country"],
+                    d["Type"],
+                    d["Age Category"],
+                    capGW,
+                    d["Capacity %"],
+                    d["Capacity %"]
+                ];
+            });
 
-  return;
-}
+            graphs[id].opts.bindings = {
+                data: { name: [], x: 0, color: 1, filter: 2, y: 3, metadata: [4, 5, 6, 7, 8], size: 9 }
+            };
+            graphs[id].opts.data = { data: [headers, ...rows] };
+            graphs[id].flourish.update(graphs[id].opts);
+
+            return;
+        }
         // Default update path for non-scatter charts
         if (filteredData.length !== 0) {
             graphs[id].opts.data = { data: filteredData };
