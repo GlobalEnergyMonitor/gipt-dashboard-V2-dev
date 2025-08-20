@@ -77,7 +77,7 @@
         "subtitle": "Capacity by age, in gigawatts (GW), with circles sized by proportion of total capacity per technology",
         "x_axis": "Age Category",
         "values": ["Coal", "Oil and gas", "Utility-scale solar", "Wind", "Nuclear", "Hydropower", "Bioenergy", "Geothermal"],
-        "dataset": "age_dashboard_v3",
+        "dataset": "age_dashboard_v4",
         "initial_state": "World",
         "filterable": true,
         "filter_by": "Country"
