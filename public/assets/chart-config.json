@@ -6,7 +6,7 @@
         "values": [
             "Coal","Oil and gas","Hydropower","Nuclear","Utility-scale solar",	"Wind",	"Bioenergy",	"Geothermal"
         ],
-        "dataset": "stacked_capv4",
+        "dataset": "GEM_capacity_stacked_aug2025",
         "initial_state": "World",
         "filterable": true,
         "filter_by": "Country"
@@ -41,7 +41,7 @@
         "values": [
             "Type"
         ],
-        "dataset": "ownership_dash_v2",
+        "dataset": "ownership_aug2025",
         "initial_state": "World",
         "filterable": true,
         "filter_by": "Country",
@@ -54,7 +54,7 @@
         "values": [
             "Coal", "Oil and gas", "Utility-scale solar", "Wind", "Nuclear", "Hydropower", "Bioenergy", "Geothermal","Coal retired", "Oil and gas retired", "Utility-scale solar retired", "Wind retired", "Nuclear retired", "Hydropower retired", "Bioenergy retired", "Geothermal retired"
         ],
-        "dataset": "net_capacity_v3",
+        "dataset": "net_capacity_aug2025",
         "initial_state": "World",
         "filterable": true,
         "filter_by": "Country"
@@ -77,7 +77,7 @@
         "subtitle": "Capacity by age, in gigawatts (GW), with circles sized by proportion of total capacity per technology",
         "x_axis": "Age Category",
         "values": ["Coal", "Oil and gas", "Utility-scale solar", "Wind", "Nuclear", "Hydropower", "Bioenergy", "Geothermal"],
-        "dataset": "age_dashboard_v4",
+        "dataset": "age_breakdown_aug2025",
         "initial_state": "World",
         "filterable": true,
         "filter_by": "Country"

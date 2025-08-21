@@ -38,6 +38,9 @@ body {
     padding: 0 0.5rem;
     margin: auto auto 2rem;
     font-size: 1.125rem;
+    position: sticky;
+top: 0;
+background-color: white;
 }
 
 .controls-container--dropdown {
