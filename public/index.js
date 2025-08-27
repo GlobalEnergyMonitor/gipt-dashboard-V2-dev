@@ -431,7 +431,7 @@ function implentGraph(id) {
         graphs[id].flourish = chart;
         return;
     }
-    // Standard fetch for other charts
+    // SCatter
     fetch(`https://public.flourish.studio/visualisation/${id}/visualisation.json`)
         .then((response) => response.json())
         .then((options) => {

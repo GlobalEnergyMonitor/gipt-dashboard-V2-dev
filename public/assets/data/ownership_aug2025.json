@@ -1,912 +1,912 @@
 [
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Drax Power Ltd",
     "Capacity (GW)":2.58,
     "Type":"Bioenergy"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Ørsted A\/S",
     "Capacity (GW)":1.987,
     "Type":"Bioenergy"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Suzano SA",
     "Capacity (GW)":1.166,
     "Type":"Bioenergy"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"National Bio Energy Group Ltd",
     "Capacity (GW)":1.05,
     "Type":"Bioenergy"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"International Paper Co",
     "Capacity (GW)":1.003,
     "Type":"Bioenergy"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Klabin SA",
     "Capacity (GW)":0.785,
     "Type":"Bioenergy"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Metsä Fibre Oy",
     "Capacity (GW)":0.773,
     "Type":"Bioenergy"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Arauco Bioenergía SA",
     "Capacity (GW)":0.71,
     "Type":"Bioenergy"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"RWE AG",
     "Capacity (GW)":0.693,
     "Type":"Bioenergy"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Kaidi Ecological and Environmental Technology Co Ltd",
     "Capacity (GW)":0.69,
     "Type":"Bioenergy"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"UPM SA",
     "Capacity (GW)":0.58,
     "Type":"Bioenergy"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Energetický a průmyslový holding AS",
     "Capacity (GW)":0.57,
     "Type":"Bioenergy"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Bracell SP Celulose Ltda",
     "Capacity (GW)":0.565,
     "Type":"Bioenergy"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"PT Riau Prima Energy",
     "Capacity (GW)":0.535,
     "Type":"Bioenergy"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"natural person(s)",
     "Capacity (GW)":0.532,
     "Type":"Bioenergy"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Georgia-Pacific LLC",
     "Capacity (GW)":0.458,
     "Type":"Bioenergy"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Wheelabrator Environmental Systems Inc",
     "Capacity (GW)":0.448,
     "Type":"Bioenergy"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Biosev SA",
     "Capacity (GW)":0.445,
     "Type":"Bioenergy"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Huaneng Power International Inc",
     "Capacity (GW)":75.98477,
     "Type":"Coal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"NTPC Ltd",
     "Capacity (GW)":61.2067,
     "Type":"Coal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"China Energy Investment Corp",
     "Capacity (GW)":59.69094,
     "Type":"Coal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"China Shenhua Energy Co Ltd",
     "Capacity (GW)":49.8773016667,
     "Type":"Coal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Eskom Holdings SOC Ltd",
     "Capacity (GW)":43.7318,
     "Type":"Coal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"China Huadian Corp Ltd",
     "Capacity (GW)":40.06806,
     "Type":"Coal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"GD POWER Development Co Ltd",
     "Capacity (GW)":39.145035,
     "Type":"Coal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Huadian Power International Co Ltd",
     "Capacity (GW)":38.197015,
     "Type":"Coal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Datang International Power Generation Co Ltd",
     "Capacity (GW)":38.03226,
     "Type":"Coal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"China Datang Corp Ltd",
     "Capacity (GW)":37.85448,
     "Type":"Coal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"China Resources Power Holdings Co Ltd",
     "Capacity (GW)":36.91572,
     "Type":"Coal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Korea Electric Power Corp",
     "Capacity (GW)":35.844,
     "Type":"Coal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"State Power Investment Corp Ltd",
     "Capacity (GW)":33.54613,
     "Type":"Coal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Zhejiang Zheneng Electric Power Co Ltd",
     "Capacity (GW)":30.73026,
     "Type":"Coal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"China Huaneng Group Co Ltd",
     "Capacity (GW)":26.32044,
     "Type":"Coal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Beijing Jingneng Power Co Ltd",
     "Capacity (GW)":20.80211,
     "Type":"Coal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"PT PLN (Persero)",
     "Capacity (GW)":18.12584,
     "Type":"Coal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Adani Power Ltd",
     "Capacity (GW)":15.498,
     "Type":"Coal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"An Hui Wenergy Co Ltd",
     "Capacity (GW)":15.30166,
     "Type":"Coal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Energy Development CORP (EDC)",
     "Capacity (GW)":1.172,
     "Type":"Geothermal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"TO BE DELETED] Corp",
     "Capacity (GW)":1.163,
     "Type":"Geothermal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Ormat Technology Inc",
     "Capacity (GW)":0.97466,
     "Type":"Geothermal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Comision Federal De Electricidad",
     "Capacity (GW)":0.915,
     "Type":"Geothermal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Contact Energy Ltd",
     "Capacity (GW)":0.7795,
     "Type":"Geothermal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"AboitizPower Corp",
     "Capacity (GW)":0.692,
     "Type":"Geothermal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Pertamina Geothermal Energy",
     "Capacity (GW)":0.67,
     "Type":"Geothermal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Kenya Electricity Generating Company PLC",
     "Capacity (GW)":0.6345,
     "Type":"Geothermal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Star Energy Geothermal",
     "Capacity (GW)":0.5229,
     "Type":"Geothermal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Orkuveita Reykjavikur",
     "Capacity (GW)":0.423,
     "Type":"Geothermal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Enel Green Power",
     "Capacity (GW)":0.4,
     "Type":"Geothermal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"CalEnergy Operating Corp",
     "Capacity (GW)":0.381,
     "Type":"Geothermal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Sarulla Operations Ltd",
     "Capacity (GW)":0.33,
     "Type":"Geothermal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Zorlu Enerji",
     "Capacity (GW)":0.306,
     "Type":"Geothermal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Atlantica Sustainable Infrastructure",
     "Capacity (GW)":0.27,
     "Type":"Geothermal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Mogan Enerji Yatirim Holding",
     "Capacity (GW)":0.258,
     "Type":"Geothermal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"KS Orka Renewables Pte Ltd",
     "Capacity (GW)":0.2264,
     "Type":"Geothermal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Tohoku Electric Power Co Inc",
     "Capacity (GW)":0.2041,
     "Type":"Geothermal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Mighty River Power",
     "Capacity (GW)":0.204,
     "Type":"Geothermal"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"China Yangzi River Three Gorges Group Co Ltd",
     "Capacity (GW)":39.4443,
     "Type":"Hydropower"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Hydro Québec",
     "Capacity (GW)":36.791,
     "Type":"Hydropower"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"PJSC RusHydro",
     "Capacity (GW)":27.991,
     "Type":"Hydropower"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"State Grid Xinyuan Co Ltd",
     "Capacity (GW)":27.407,
     "Type":"Hydropower"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Corporación Eléctrica Nacional SA",
     "Capacity (GW)":16.01,
     "Type":"Hydropower"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"EuroSibEnergo JSC",
     "Capacity (GW)":15.002,
     "Type":"Hydropower"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Eletrobras Furnas",
     "Capacity (GW)":14.95548,
     "Type":"Hydropower"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"US Bureau of Reclamation",
     "Capacity (GW)":14.738,
     "Type":"Hydropower"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"EDF Energy Ltd",
     "Capacity (GW)":14.363,
     "Type":"Hydropower"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Itaipú Binational",
     "Capacity (GW)":14.0,
     "Type":"Hydropower"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Elektrik Üretim AS (EÜAŞ)",
     "Capacity (GW)":13.522,
     "Type":"Hydropower"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"State Power Investment Group Upper Yellow River Hydropower Development Co Ltd",
     "Capacity (GW)":12.835,
     "Type":"Hydropower"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"BC Hydro",
     "Capacity (GW)":12.0,
     "Type":"Hydropower"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Statkraft",
     "Capacity (GW)":11.99867,
     "Type":"Hydropower"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"China Huaneng Group Co Ltd",
     "Capacity (GW)":11.952,
     "Type":"Hydropower"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Vietnam Electricity (EVN)",
     "Capacity (GW)":11.447,
     "Type":"Hydropower"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Comisión Federal de Electricidad EPE",
     "Capacity (GW)":11.434,
     "Type":"Hydropower"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Norte Energia SA",
     "Capacity (GW)":11.233,
     "Type":"Hydropower"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Companhia Hidro Elétrica do São Francisco SA (CHESF)",
     "Capacity (GW)":11.11712,
     "Type":"Hydropower"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Electricité de France SA",
     "Capacity (GW)":64.04,
     "Type":"Nuclear"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Rosatom",
     "Capacity (GW)":28.576,
     "Type":"Nuclear"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Korea Hydro & Nuclear Power CO",
     "Capacity (GW)":27.071,
     "Type":"Nuclear"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"China National Nuclear Power CO LTD",
     "Capacity (GW)":22.35,
     "Type":"Nuclear"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Exelon",
     "Capacity (GW)":16.393,
     "Type":"Nuclear"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Ontario Power Generation",
     "Capacity (GW)":13.924,
     "Type":"Nuclear"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"SE NNEGC \"Energoatom\"",
     "Capacity (GW)":13.835,
     "Type":"Nuclear"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"CGNPC Nuclear Power Investment CO LTD",
     "Capacity (GW)":8.886,
     "Type":"Nuclear"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Tennessee Valley Authority",
     "Capacity (GW)":8.624,
     "Type":"Nuclear"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"China General Nuclear Power Co Ltd",
     "Capacity (GW)":8.496,
     "Type":"Nuclear"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Nuclear Power Corporation Of India LTD",
     "Capacity (GW)":7.54,
     "Type":"Nuclear"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Georgia Power Co",
     "Capacity (GW)":6.79,
     "Type":"Nuclear"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Kansai Electric Power CO",
     "Capacity (GW)":6.578,
     "Type":"Nuclear"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"EDF Energy Ltd",
     "Capacity (GW)":6.534,
     "Type":"Nuclear"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Emirates Nuclear Energy CORP",
     "Capacity (GW)":5.668,
     "Type":"Nuclear"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Duke Energy Corp",
     "Capacity (GW)":5.112,
     "Type":"Nuclear"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"PSEG Power Inc",
     "Capacity (GW)":5.106,
     "Type":"Nuclear"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Guangxi Fangchenggang CGN Nuclear Power Industry Investment CO LTD",
     "Capacity (GW)":4.532,
     "Type":"Nuclear"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"CGN Ninghe Investment CO LTD",
     "Capacity (GW)":4.356,
     "Type":"Nuclear"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Arizona Public Service Co",
     "Capacity (GW)":4.242,
     "Type":"Nuclear"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Saudi Electricity Co",
     "Capacity (GW)":61.86705,
     "Type":"Oil and gas"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Egyptian Electricity Holding Co",
     "Capacity (GW)":49.4717,
     "Type":"Oil and gas"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"NextEra Energy Inc",
     "Capacity (GW)":28.2461,
     "Type":"Oil and gas"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Chubu Electric Power Co Inc",
     "Capacity (GW)":27.1576956667,
     "Type":"Oil and gas"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Ministry of Electricity (Iraq)",
     "Capacity (GW)":27.0225,
     "Type":"Oil and gas"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Tokyo Electric Power Co",
     "Capacity (GW)":26.7884456667,
     "Type":"Oil and gas"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Vistra Corp",
     "Capacity (GW)":25.33716,
     "Type":"Oil and gas"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Duke Energy Corp",
     "Capacity (GW)":25.2947495,
     "Type":"Oil and gas"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Southern Co",
     "Capacity (GW)":25.0161505,
     "Type":"Oil and gas"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Korea Electric Power Corp",
     "Capacity (GW)":24.33751,
     "Type":"Oil and gas"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Inter RAO PJSC",
     "Capacity (GW)":24.16045,
     "Type":"Oil and gas"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Comisión Federal de Electricidad EPE",
     "Capacity (GW)":23.2057,
     "Type":"Oil and gas"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"ENGIE SA",
     "Capacity (GW)":22.0629768889,
     "Type":"Oil and gas"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Entergy Corp",
     "Capacity (GW)":20.5842,
     "Type":"Oil and gas"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Sonelgaz SpA",
     "Capacity (GW)":19.3591,
     "Type":"Oil and gas"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"PT PLN (Persero)",
     "Capacity (GW)":18.4789,
     "Type":"Oil and gas"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Ministry of Electricity and Water and Renewable Energy (Kuwait)",
     "Capacity (GW)":17.8775,
     "Type":"Oil and gas"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Taiwan Power Co",
     "Capacity (GW)":16.073,
     "Type":"Oil and gas"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"RWE AG",
     "Capacity (GW)":15.71518,
     "Type":"Oil and gas"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"NextEra Energy Inc",
     "Capacity (GW)":11.1072,
     "Type":"Utility-scale solar"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Tianjin China Green Power Investment Co Ltd",
     "Capacity (GW)":10.305558604,
     "Type":"Utility-scale solar"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Adani Group",
     "Capacity (GW)":7.3503435076,
     "Type":"Utility-scale solar"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"China Three Gorges Renewables (Group) Co Ltd",
     "Capacity (GW)":5.626899261,
     "Type":"Utility-scale solar"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"China Nuclear Huineng Co Ltd",
     "Capacity (GW)":5.1831406541,
     "Type":"Utility-scale solar"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Enel Green Power SpA",
     "Capacity (GW)":4.9268812309,
     "Type":"Utility-scale solar"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"ReNew Power",
     "Capacity (GW)":4.8457411661,
     "Type":"Utility-scale solar"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"ENGIE SA",
     "Capacity (GW)":4.5608850287,
     "Type":"Utility-scale solar"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Huadian New Energy Group Co Ltd",
     "Capacity (GW)":4.4446963901,
     "Type":"Utility-scale solar"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"China Three Gorges New Energy (Group) Co Ltd",
     "Capacity (GW)":4.2192326602,
     "Type":"Utility-scale solar"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Florida Power & Light Co",
     "Capacity (GW)":4.009,
     "Type":"Utility-scale solar"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"NTPC Ltd",
     "Capacity (GW)":3.6385275442,
     "Type":"Utility-scale solar"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Duke Energy Corp",
     "Capacity (GW)":3.5247,
     "Type":"Utility-scale solar"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"EDF Renewables",
     "Capacity (GW)":3.4539668469,
     "Type":"Utility-scale solar"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"China Power International Development Co Ltd",
     "Capacity (GW)":3.3731600022,
     "Type":"Utility-scale solar"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Huaneng Renewables Corp Ltd",
     "Capacity (GW)":3.3693189618,
     "Type":"Utility-scale solar"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Huaneng Power International Inc",
     "Capacity (GW)":3.258200878,
     "Type":"Utility-scale solar"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Clearway Energy Group LLC",
     "Capacity (GW)":3.250575,
     "Type":"Utility-scale solar"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"CECEP Solar Energy Technology Co Ltd",
     "Capacity (GW)":3.1611385009,
     "Type":"Utility-scale solar"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"NextEra Energy Inc",
     "Capacity (GW)":23.5519,
     "Type":"Wind"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"EDF Renewables",
     "Capacity (GW)":12.2137833333,
     "Type":"Wind"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Enel Green Power SpA",
     "Capacity (GW)":11.92415,
     "Type":"Wind"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"EDPR Renewable Energy Sources of Greece 1 Sole Proprietorship",
     "Capacity (GW)":9.2470666667,
     "Type":"Wind"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Avangrid Renewables",
     "Capacity (GW)":8.1487,
     "Type":"Wind"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Iberdrola Renovables Energia SA",
     "Capacity (GW)":7.7355,
     "Type":"Wind"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"MidAmerican Energy Co",
     "Capacity (GW)":7.4864,
     "Type":"Wind"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Ørsted A\/S",
     "Capacity (GW)":7.2098166667,
     "Type":"Wind"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"China Longyuan Power Group Corp Ltd",
     "Capacity (GW)":6.0765,
     "Type":"Wind"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Acciona Energía SAU",
     "Capacity (GW)":6.0005166667,
     "Type":"Wind"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"RWE Renewables",
     "Capacity (GW)":5.6733666667,
     "Type":"Wind"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"ENGIE SA",
     "Capacity (GW)":5.0914,
     "Type":"Wind"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"AES Corp",
     "Capacity (GW)":4.9357,
     "Type":"Wind"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Pattern Energy",
     "Capacity (GW)":4.8604,
     "Type":"Wind"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Invenergy LLC",
     "Capacity (GW)":4.83115,
     "Type":"Wind"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Vattenfall AB",
     "Capacity (GW)":4.6952,
     "Type":"Wind"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"Xcel Energy Inc",
     "Capacity (GW)":4.6685,
     "Type":"Wind"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"China Guangdong Nuclear Wind Energy Ltd",
     "Capacity (GW)":4.353,
     "Type":"Wind"
   },
   {
-    "Country":"Global",
+    "Country":"World",
     "Parent":"ReNew Power",
     "Capacity (GW)":3.9055,
     "Type":"Wind"

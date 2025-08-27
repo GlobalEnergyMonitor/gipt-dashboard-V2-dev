@@ -1,156 +1,156 @@
 ﻿Country,Parent,Capacity (GW),Type
-Global,Drax Power Ltd,2.58,Bioenergy
-Global,Ørsted A/S,1.987,Bioenergy
-Global,Suzano SA,1.166,Bioenergy
-Global,National Bio Energy Group Ltd,1.05,Bioenergy
-Global,International Paper Co,1.003,Bioenergy
-Global,Klabin SA,0.785,Bioenergy
-Global,Metsä Fibre Oy,0.773,Bioenergy
-Global,Arauco Bioenergía SA,0.71,Bioenergy
-Global,RWE AG,0.693,Bioenergy
-Global,Kaidi Ecological and Environmental Technology Co Ltd,0.69,Bioenergy
-Global,UPM SA,0.58,Bioenergy
-Global,Energetický a průmyslový holding AS,0.57,Bioenergy
-Global,Bracell SP Celulose Ltda,0.565,Bioenergy
-Global,PT Riau Prima Energy,0.535,Bioenergy
-Global,natural person(s),0.532,Bioenergy
-Global,Georgia-Pacific LLC,0.458,Bioenergy
-Global,Wheelabrator Environmental Systems Inc,0.448,Bioenergy
-Global,Biosev SA,0.445,Bioenergy
-Global,Huaneng Power International Inc,75.98477,Coal
-Global,NTPC Ltd,61.2067,Coal
-Global,China Energy Investment Corp,59.690940000000005,Coal
-Global,China Shenhua Energy Co Ltd,49.87730166666667,Coal
-Global,Eskom Holdings SOC Ltd,43.7318,Coal
-Global,China Huadian Corp Ltd,40.068059999999996,Coal
-Global,GD POWER Development Co Ltd,39.145035,Coal
-Global,Huadian Power International Co Ltd,38.197015,Coal
-Global,Datang International Power Generation Co Ltd,38.03226,Coal
-Global,China Datang Corp Ltd,37.85448,Coal
-Global,China Resources Power Holdings Co Ltd,36.91572,Coal
-Global,Korea Electric Power Corp,35.844,Coal
-Global,State Power Investment Corp Ltd,33.54613,Coal
-Global,Zhejiang Zheneng Electric Power Co Ltd,30.73026,Coal
-Global,China Huaneng Group Co Ltd,26.320439999999998,Coal
-Global,Beijing Jingneng Power Co Ltd,20.80211,Coal
-Global,PT PLN (Persero),18.12584,Coal
-Global,Adani Power Ltd,15.498,Coal
-Global,An Hui Wenergy Co Ltd,15.30166,Coal
-Global,Energy Development CORP (EDC),1.172,Geothermal
-Global,TO BE DELETED] Corp,1.163,Geothermal
-Global,Ormat Technology Inc,0.97466,Geothermal
-Global,Comision Federal De Electricidad,0.915,Geothermal
-Global,Contact Energy Ltd,0.7795,Geothermal
-Global,AboitizPower Corp,0.692,Geothermal
-Global,Pertamina Geothermal Energy,0.67,Geothermal
-Global,Kenya Electricity Generating Company PLC,0.6345,Geothermal
-Global,Star Energy Geothermal,0.5229,Geothermal
-Global,Orkuveita Reykjavikur,0.423,Geothermal
-Global,Enel Green Power,0.4,Geothermal
-Global,CalEnergy Operating Corp,0.381,Geothermal
-Global,Sarulla Operations Ltd,0.33,Geothermal
-Global,Zorlu Enerji,0.306,Geothermal
-Global,Atlantica Sustainable Infrastructure,0.27,Geothermal
-Global,Mogan Enerji Yatirim Holding,0.258,Geothermal
-Global,KS Orka Renewables Pte Ltd,0.22640000000000002,Geothermal
-Global,Tohoku Electric Power Co Inc,0.2041,Geothermal
-Global,Mighty River Power,0.204,Geothermal
-Global,China Yangzi River Three Gorges Group Co Ltd,39.444300000000005,Hydropower
-Global,Hydro Québec,36.791,Hydropower
-Global,PJSC RusHydro,27.991,Hydropower
-Global,State Grid Xinyuan Co Ltd,27.407,Hydropower
-Global,Corporación Eléctrica Nacional SA,16.01,Hydropower
-Global,EuroSibEnergo JSC,15.002,Hydropower
-Global,Eletrobras Furnas,14.95548,Hydropower
-Global,US Bureau of Reclamation,14.738,Hydropower
-Global,EDF Energy Ltd,14.363,Hydropower
-Global,Itaipú Binational,14.0,Hydropower
-Global,Elektrik Üretim AS (EÜAŞ),13.522,Hydropower
-Global,State Power Investment Group Upper Yellow River Hydropower Development Co Ltd,12.835,Hydropower
-Global,BC Hydro,12.0,Hydropower
-Global,Statkraft,11.99867,Hydropower
-Global,China Huaneng Group Co Ltd,11.952,Hydropower
-Global,Vietnam Electricity (EVN),11.447,Hydropower
-Global,Comisión Federal de Electricidad EPE,11.434,Hydropower
-Global,Norte Energia SA,11.233,Hydropower
-Global,Companhia Hidro Elétrica do São Francisco SA (CHESF),11.117119999999998,Hydropower
-Global,Electricité de France SA,64.04,Nuclear
-Global,Rosatom,28.576,Nuclear
-Global,Korea Hydro & Nuclear Power CO,27.071,Nuclear
-Global,China National Nuclear Power CO LTD,22.35,Nuclear
-Global,Exelon,16.393,Nuclear
-Global,Ontario Power Generation,13.924,Nuclear
-Global,"SE NNEGC ""Energoatom""",13.835,Nuclear
-Global,CGNPC Nuclear Power Investment CO LTD,8.886,Nuclear
-Global,Tennessee Valley Authority,8.624,Nuclear
-Global,China General Nuclear Power Co Ltd,8.496,Nuclear
-Global,Nuclear Power Corporation Of India LTD,7.54,Nuclear
-Global,Georgia Power Co,6.79,Nuclear
-Global,Kansai Electric Power CO,6.578,Nuclear
-Global,EDF Energy Ltd,6.534,Nuclear
-Global,Emirates Nuclear Energy CORP,5.668,Nuclear
-Global,Duke Energy Corp,5.112,Nuclear
-Global,PSEG Power Inc,5.106,Nuclear
-Global,Guangxi Fangchenggang CGN Nuclear Power Industry Investment CO LTD,4.532,Nuclear
-Global,CGN Ninghe Investment CO LTD,4.356,Nuclear
-Global,Arizona Public Service Co,4.242,Nuclear
-Global,Saudi Electricity Co,61.867050000000006,Oil and gas
-Global,Egyptian Electricity Holding Co,49.4717,Oil and gas
-Global,NextEra Energy Inc,28.2461,Oil and gas
-Global,Chubu Electric Power Co Inc,27.157695666666665,Oil and gas
-Global,Ministry of Electricity (Iraq),27.0225,Oil and gas
-Global,Tokyo Electric Power Co,26.788445666666668,Oil and gas
-Global,Vistra Corp,25.33716,Oil and gas
-Global,Duke Energy Corp,25.2947495,Oil and gas
-Global,Southern Co,25.0161505,Oil and gas
-Global,Korea Electric Power Corp,24.337509999999998,Oil and gas
-Global,Inter RAO PJSC,24.16045,Oil and gas
-Global,Comisión Federal de Electricidad EPE,23.2057,Oil and gas
-Global,ENGIE SA,22.06297688888889,Oil and gas
-Global,Entergy Corp,20.5842,Oil and gas
-Global,Sonelgaz SpA,19.359099999999998,Oil and gas
-Global,PT PLN (Persero),18.478900000000003,Oil and gas
-Global,Ministry of Electricity and Water and Renewable Energy (Kuwait),17.8775,Oil and gas
-Global,Taiwan Power Co,16.073,Oil and gas
-Global,RWE AG,15.71518,Oil and gas
-Global,NextEra Energy Inc,11.107199999999999,Utility-scale solar
-Global,Tianjin China Green Power Investment Co Ltd,10.30555860403863,Utility-scale solar
-Global,Adani Group,7.350343507574835,Utility-scale solar
-Global,China Three Gorges Renewables (Group) Co Ltd,5.626899261047702,Utility-scale solar
-Global,China Nuclear Huineng Co Ltd,5.183140654082528,Utility-scale solar
-Global,Enel Green Power SpA,4.926881230896776,Utility-scale solar
-Global,ReNew Power,4.845741166077738,Utility-scale solar
-Global,ENGIE SA,4.560885028686805,Utility-scale solar
-Global,Huadian New Energy Group Co Ltd,4.444696390108282,Utility-scale solar
-Global,China Three Gorges New Energy (Group) Co Ltd,4.21923266022827,Utility-scale solar
-Global,Florida Power & Light Co,4.009,Utility-scale solar
-Global,NTPC Ltd,3.6385275441696114,Utility-scale solar
-Global,Duke Energy Corp,3.5247,Utility-scale solar
-Global,EDF Renewables,3.4539668469387754,Utility-scale solar
-Global,China Power International Development Co Ltd,3.373160002194908,Utility-scale solar
-Global,Huaneng Renewables Corp Ltd,3.369318961808604,Utility-scale solar
-Global,Huaneng Power International Inc,3.2582008779631257,Utility-scale solar
-Global,Clearway Energy Group LLC,3.250575,Utility-scale solar
-Global,CECEP Solar Energy Technology Co Ltd,3.161138500877963,Utility-scale solar
-Global,NextEra Energy Inc,23.5519,Wind
-Global,EDF Renewables,12.213783333333334,Wind
-Global,Enel Green Power SpA,11.92415,Wind
-Global,EDPR Renewable Energy Sources of Greece 1 Sole Proprietorship,9.247066666666667,Wind
-Global,Avangrid Renewables,8.1487,Wind
-Global,Iberdrola Renovables Energia SA,7.7355,Wind
-Global,MidAmerican Energy Co,7.4864,Wind
-Global,Ørsted A/S,7.209816666666668,Wind
-Global,China Longyuan Power Group Corp Ltd,6.0765,Wind
-Global,Acciona Energía SAU,6.000516666666666,Wind
-Global,RWE Renewables,5.6733666666666664,Wind
-Global,ENGIE SA,5.091399999999999,Wind
-Global,AES Corp,4.9357,Wind
-Global,Pattern Energy,4.860399999999999,Wind
-Global,Invenergy LLC,4.83115,Wind
-Global,Vattenfall AB,4.6952,Wind
-Global,Xcel Energy Inc,4.6685,Wind
-Global,China Guangdong Nuclear Wind Energy Ltd,4.353,Wind
-Global,ReNew Power,3.9055,Wind
+World,Drax Power Ltd,2.58,Bioenergy
+World,Ørsted A/S,1.987,Bioenergy
+World,Suzano SA,1.166,Bioenergy
+World,National Bio Energy Group Ltd,1.05,Bioenergy
+World,International Paper Co,1.003,Bioenergy
+World,Klabin SA,0.785,Bioenergy
+World,Metsä Fibre Oy,0.773,Bioenergy
+World,Arauco Bioenergía SA,0.71,Bioenergy
+World,RWE AG,0.693,Bioenergy
+World,Kaidi Ecological and Environmental Technology Co Ltd,0.69,Bioenergy
+World,UPM SA,0.58,Bioenergy
+World,Energetický a průmyslový holding AS,0.57,Bioenergy
+World,Bracell SP Celulose Ltda,0.565,Bioenergy
+World,PT Riau Prima Energy,0.535,Bioenergy
+World,natural person(s),0.532,Bioenergy
+World,Georgia-Pacific LLC,0.458,Bioenergy
+World,Wheelabrator Environmental Systems Inc,0.448,Bioenergy
+World,Biosev SA,0.445,Bioenergy
+World,Huaneng Power International Inc,75.98477,Coal
+World,NTPC Ltd,61.2067,Coal
+World,China Energy Investment Corp,59.690940000000005,Coal
+World,China Shenhua Energy Co Ltd,49.87730166666667,Coal
+World,Eskom Holdings SOC Ltd,43.7318,Coal
+World,China Huadian Corp Ltd,40.068059999999996,Coal
+World,GD POWER Development Co Ltd,39.145035,Coal
+World,Huadian Power International Co Ltd,38.197015,Coal
+World,Datang International Power Generation Co Ltd,38.03226,Coal
+World,China Datang Corp Ltd,37.85448,Coal
+World,China Resources Power Holdings Co Ltd,36.91572,Coal
+World,Korea Electric Power Corp,35.844,Coal
+World,State Power Investment Corp Ltd,33.54613,Coal
+World,Zhejiang Zheneng Electric Power Co Ltd,30.73026,Coal
+World,China Huaneng Group Co Ltd,26.320439999999998,Coal
+World,Beijing Jingneng Power Co Ltd,20.80211,Coal
+World,PT PLN (Persero),18.12584,Coal
+World,Adani Power Ltd,15.498,Coal
+World,An Hui Wenergy Co Ltd,15.30166,Coal
+World,Energy Development CORP (EDC),1.172,Geothermal
+World,TO BE DELETED] Corp,1.163,Geothermal
+World,Ormat Technology Inc,0.97466,Geothermal
+World,Comision Federal De Electricidad,0.915,Geothermal
+World,Contact Energy Ltd,0.7795,Geothermal
+World,AboitizPower Corp,0.692,Geothermal
+World,Pertamina Geothermal Energy,0.67,Geothermal
+World,Kenya Electricity Generating Company PLC,0.6345,Geothermal
+World,Star Energy Geothermal,0.5229,Geothermal
+World,Orkuveita Reykjavikur,0.423,Geothermal
+World,Enel Green Power,0.4,Geothermal
+World,CalEnergy Operating Corp,0.381,Geothermal
+World,Sarulla Operations Ltd,0.33,Geothermal
+World,Zorlu Enerji,0.306,Geothermal
+World,Atlantica Sustainable Infrastructure,0.27,Geothermal
+World,Mogan Enerji Yatirim Holding,0.258,Geothermal
+World,KS Orka Renewables Pte Ltd,0.22640000000000002,Geothermal
+World,Tohoku Electric Power Co Inc,0.2041,Geothermal
+World,Mighty River Power,0.204,Geothermal
+World,China Yangzi River Three Gorges Group Co Ltd,39.444300000000005,Hydropower
+World,Hydro Québec,36.791,Hydropower
+World,PJSC RusHydro,27.991,Hydropower
+World,State Grid Xinyuan Co Ltd,27.407,Hydropower
+World,Corporación Eléctrica Nacional SA,16.01,Hydropower
+World,EuroSibEnergo JSC,15.002,Hydropower
+World,Eletrobras Furnas,14.95548,Hydropower
+World,US Bureau of Reclamation,14.738,Hydropower
+World,EDF Energy Ltd,14.363,Hydropower
+World,Itaipú Binational,14.0,Hydropower
+World,Elektrik Üretim AS (EÜAŞ),13.522,Hydropower
+World,State Power Investment Group Upper Yellow River Hydropower Development Co Ltd,12.835,Hydropower
+World,BC Hydro,12.0,Hydropower
+World,Statkraft,11.99867,Hydropower
+World,China Huaneng Group Co Ltd,11.952,Hydropower
+World,Vietnam Electricity (EVN),11.447,Hydropower
+World,Comisión Federal de Electricidad EPE,11.434,Hydropower
+World,Norte Energia SA,11.233,Hydropower
+World,Companhia Hidro Elétrica do São Francisco SA (CHESF),11.117119999999998,Hydropower
+World,Electricité de France SA,64.04,Nuclear
+World,Rosatom,28.576,Nuclear
+World,Korea Hydro & Nuclear Power CO,27.071,Nuclear
+World,China National Nuclear Power CO LTD,22.35,Nuclear
+World,Exelon,16.393,Nuclear
+World,Ontario Power Generation,13.924,Nuclear
+World,"SE NNEGC ""Energoatom""",13.835,Nuclear
+World,CGNPC Nuclear Power Investment CO LTD,8.886,Nuclear
+World,Tennessee Valley Authority,8.624,Nuclear
+World,China General Nuclear Power Co Ltd,8.496,Nuclear
+World,Nuclear Power Corporation Of India LTD,7.54,Nuclear
+World,Georgia Power Co,6.79,Nuclear
+World,Kansai Electric Power CO,6.578,Nuclear
+World,EDF Energy Ltd,6.534,Nuclear
+World,Emirates Nuclear Energy CORP,5.668,Nuclear
+World,Duke Energy Corp,5.112,Nuclear
+World,PSEG Power Inc,5.106,Nuclear
+World,Guangxi Fangchenggang CGN Nuclear Power Industry Investment CO LTD,4.532,Nuclear
+World,CGN Ninghe Investment CO LTD,4.356,Nuclear
+World,Arizona Public Service Co,4.242,Nuclear
+World,Saudi Electricity Co,61.867050000000006,Oil and gas
+World,Egyptian Electricity Holding Co,49.4717,Oil and gas
+World,NextEra Energy Inc,28.2461,Oil and gas
+World,Chubu Electric Power Co Inc,27.157695666666665,Oil and gas
+World,Ministry of Electricity (Iraq),27.0225,Oil and gas
+World,Tokyo Electric Power Co,26.788445666666668,Oil and gas
+World,Vistra Corp,25.33716,Oil and gas
+World,Duke Energy Corp,25.2947495,Oil and gas
+World,Southern Co,25.0161505,Oil and gas
+World,Korea Electric Power Corp,24.337509999999998,Oil and gas
+World,Inter RAO PJSC,24.16045,Oil and gas
+World,Comisión Federal de Electricidad EPE,23.2057,Oil and gas
+World,ENGIE SA,22.06297688888889,Oil and gas
+World,Entergy Corp,20.5842,Oil and gas
+World,Sonelgaz SpA,19.359099999999998,Oil and gas
+World,PT PLN (Persero),18.478900000000003,Oil and gas
+World,Ministry of Electricity and Water and Renewable Energy (Kuwait),17.8775,Oil and gas
+World,Taiwan Power Co,16.073,Oil and gas
+World,RWE AG,15.71518,Oil and gas
+World,NextEra Energy Inc,11.107199999999999,Utility-scale solar
+World,Tianjin China Green Power Investment Co Ltd,10.30555860403863,Utility-scale solar
+World,Adani Group,7.350343507574835,Utility-scale solar
+World,China Three Gorges Renewables (Group) Co Ltd,5.626899261047702,Utility-scale solar
+World,China Nuclear Huineng Co Ltd,5.183140654082528,Utility-scale solar
+World,Enel Green Power SpA,4.926881230896776,Utility-scale solar
+World,ReNew Power,4.845741166077738,Utility-scale solar
+World,ENGIE SA,4.560885028686805,Utility-scale solar
+World,Huadian New Energy Group Co Ltd,4.444696390108282,Utility-scale solar
+World,China Three Gorges New Energy (Group) Co Ltd,4.21923266022827,Utility-scale solar
+World,Florida Power & Light Co,4.009,Utility-scale solar
+World,NTPC Ltd,3.6385275441696114,Utility-scale solar
+World,Duke Energy Corp,3.5247,Utility-scale solar
+World,EDF Renewables,3.4539668469387754,Utility-scale solar
+World,China Power International Development Co Ltd,3.373160002194908,Utility-scale solar
+World,Huaneng Renewables Corp Ltd,3.369318961808604,Utility-scale solar
+World,Huaneng Power International Inc,3.2582008779631257,Utility-scale solar
+World,Clearway Energy Group LLC,3.250575,Utility-scale solar
+World,CECEP Solar Energy Technology Co Ltd,3.161138500877963,Utility-scale solar
+World,NextEra Energy Inc,23.5519,Wind
+World,EDF Renewables,12.213783333333334,Wind
+World,Enel Green Power SpA,11.92415,Wind
+World,EDPR Renewable Energy Sources of Greece 1 Sole Proprietorship,9.247066666666667,Wind
+World,Avangrid Renewables,8.1487,Wind
+World,Iberdrola Renovables Energia SA,7.7355,Wind
+World,MidAmerican Energy Co,7.4864,Wind
+World,Ørsted A/S,7.209816666666668,Wind
+World,China Longyuan Power Group Corp Ltd,6.0765,Wind
+World,Acciona Energía SAU,6.000516666666666,Wind
+World,RWE Renewables,5.6733666666666664,Wind
+World,ENGIE SA,5.091399999999999,Wind
+World,AES Corp,4.9357,Wind
+World,Pattern Energy,4.860399999999999,Wind
+World,Invenergy LLC,4.83115,Wind
+World,Vattenfall AB,4.6952,Wind
+World,Xcel Energy Inc,4.6685,Wind
+World,China Guangdong Nuclear Wind Energy Ltd,4.353,Wind
+World,ReNew Power,3.9055,Wind
 Afghanistan,Da Afghanistan Breshna Sherkat (DABS),0.152,Hydropower
 Afghanistan,Ministry of Energy and Water Afghanistan,0.094,Hydropower
 Afghanistan,Ministry of Water & Power Afghanistan,0.066,Hydropower
