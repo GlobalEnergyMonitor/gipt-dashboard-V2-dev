@@ -10,8 +10,8 @@ const tickers = {
 getData();
 
 async function getData() {
-    const urls = ["./assets/page-config.json", "./assets/chart-config.json", "./assets/text-config.json"];
-    const keys = ["dashboard", "charts", "text"];
+    const urls = ["./assets/page-config.json", "./assets/chart-config.json", "./assets/text-config.json","./assets/map-bounds.json" ];
+    const keys = ["dashboard", "charts", "text", "mapBounds"];
     const promises = [];
     for (const url of urls) {
         promises.push(fetch(url));
@@ -340,11 +340,22 @@ function implentGraph(id) {
         const fullData = config.datasets["24167887"];
         const selected = getSelectedText();
 
-        const filtered = selected.toLowerCase() === "world"
-            ? fullData
-            : fullData.filter(entry =>
-                entry["Country/area"]?.trim().toLowerCase() === selected.trim().toLowerCase()
-            );
+let filtered;
+if (selected.toLowerCase() === "world") {
+  filtered = fullData;
+} else {
+  filtered = fullData.filter(entry => {
+    const country = entry["Country/area"]?.trim().toLowerCase();
+
+    // Handle Region as array of strings
+    const regions = Array.isArray(entry["Region"])
+      ? entry["Region"].map(r => r.trim().toLowerCase())
+      : [];
+
+    return country === selected.trim().toLowerCase() ||
+           regions.includes(selected.trim().toLowerCase());
+  });
+}
 
         const headers = [
             "Type", "Latitude", "Longitude",
@@ -368,33 +379,8 @@ function implentGraph(id) {
         const container = document.querySelector(`#${containerId}`);
         container.innerHTML = "";
 
-        let bounds;
+let bounds = config.mapBounds[selected] || config.mapBounds["World"];
 
-        if (selected.toLowerCase() === "world") {
-            // 🌍 Fixed global bounds
-            bounds = {
-                lat_min: -25,
-                lat_max: 50,
-                lng_min: -100,
-                lng_max: 100
-            };
-        } else {
-            let latitudes = filtered.map(d => d["Latitude"]).filter(v => typeof v === "number");
-            let longitudes = filtered.map(d => d["Longitude"]).filter(v => typeof v === "number");
-
-            if (latitudes.length === 0 || longitudes.length === 0) {
-                latitudes = [34.5, 71];
-                longitudes = [-25, 40];
-            }
-
-            const pad = 0.5;
-            bounds = {
-                lat_min: Math.min(...latitudes) - pad,
-                lat_max: Math.max(...latitudes) + pad,
-                lng_min: Math.min(...longitudes) - pad,
-                lng_max: Math.max(...longitudes) + pad
-            };
-        }
 
         const chart = new Flourish.Live({
             template: "@flourish/time-map",
@@ -581,11 +567,22 @@ function updateGraphs(key) {
             const fullData = config.datasets[id];
             const selected = getUnformattedInputName(key);
 
-            const filtered = selected.toLowerCase() === "world"
-                ? fullData
-                : fullData.filter(entry =>
-                    entry["Country/area"]?.trim().toLowerCase() === selected.trim().toLowerCase()
-                );
+let filtered;
+if (selected.toLowerCase() === "world") {
+  filtered = fullData;
+} else {
+  filtered = fullData.filter(entry => {
+    const country = entry["Country/area"]?.trim().toLowerCase();
+
+    // Handle Region as array of strings
+    const regions = Array.isArray(entry["Region"])
+      ? entry["Region"].map(r => r.trim().toLowerCase())
+      : [];
+
+    return country === selected.trim().toLowerCase() ||
+           regions.includes(selected.trim().toLowerCase());
+  });
+}
 
             const headers = [
                 "Type", "Latitude", "Longitude",
@@ -608,33 +605,8 @@ function updateGraphs(key) {
             const container = document.querySelector(`#${containerId}`);
             container.innerHTML = "";
 
-            let bounds;
+let bounds = config.mapBounds[selected] || config.mapBounds["World"];
 
-            if (selected.toLowerCase() === "world") {
-                // 🌍 Fixed global bounds
-                bounds = {
-                    lat_min: -25,
-                    lat_max: 50,
-                    lng_min: -100,
-                    lng_max: 100
-                };
-            } else {
-                let latitudes = filtered.map(d => d["Latitude"]).filter(v => typeof v === "number");
-                let longitudes = filtered.map(d => d["Longitude"]).filter(v => typeof v === "number");
-
-                if (latitudes.length === 0 || longitudes.length === 0) {
-                    latitudes = [34.5, 71];
-                    longitudes = [-25, 40];
-                }
-
-                const pad = 0.5;
-                bounds = {
-                    lat_min: Math.min(...latitudes) - pad,
-                    lat_max: Math.max(...latitudes) + pad,
-                    lng_min: Math.min(...longitudes) - pad,
-                    lng_max: Math.max(...longitudes) + pad
-                };
-            }
 
             const chart = new Flourish.Live({
                 template: "@flourish/time-map",

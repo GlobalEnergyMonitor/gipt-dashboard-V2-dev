@@ -1,0 +1,7 @@
+[{
+  "World": { "lat_min": -25, "lat_max": 50, "lng_min": -100, "lng_max": 100 },
+  "Brazil": { "lat_min": -34, "lat_max": 6, "lng_min": -74, "lng_max": -34 },
+  "BRICS": { "lat_min": -35, "lat_max": 55, "lng_min": -80, "lng_max": 140 },
+  "G20": { "lat_min": -40, "lat_max": 70, "lng_min": -130, "lng_max": 150 },
+  "European Union": { "lat_min": 34, "lat_max": 71, "lng_min": -25, "lng_max": 40 }
+}]
