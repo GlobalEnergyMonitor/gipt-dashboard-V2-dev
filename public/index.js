@@ -670,6 +670,7 @@ function updateGraphs(key) {
             return;
         }
 
+        
         // Filter data for all other charts
         let filteredData = config.datasets[id];
         if (currentGraph.filterable) {
@@ -691,7 +692,6 @@ function updateGraphs(key) {
         if (isScatter) {
             const allData = config.datasets[id];
             const filterField = currentGraph.filter_by || "Country";
-
 
             const headers = [
                 "Age Category", "Type", "Country", "Type", "Country", "Type", "Age Category", "Capacity (GW)", "Capacity %", "Capacity %"
@@ -724,6 +724,32 @@ function updateGraphs(key) {
 
             return;
         }
+        const isHierarchy =
+    graphs[id]?.opts?.template === "@flourish/hierarchy" ||
+    ["23191160", "23185423"].includes(id);
+
+if (isHierarchy) {
+    let filteredData = [];
+
+    if (!config.datasets[id]) {
+        console.warn(`No dataset found for graph ${id}`);
+    } else if (currentGraph?.filterable && currentGraph?.filter_by) {
+        filteredData = config.datasets[id].filter(entry =>
+            formatName(entry[currentGraph.filter_by]) === key
+        );
+    } else {
+        filteredData = config.datasets[id];
+    }
+
+    graphs[id].flourish.update({
+        template: graphs[id].opts.template,            // ✅ required for animation
+        bindings: graphs[id].opts.bindings,            // ✅ required for popup, nesting
+        data: { data: filteredData },                  // ✅ updated data
+        animate: true                                  // ✅ animation request
+    });
+
+    return;
+}
         // Default update path for non-scatter charts
         if (filteredData.length !== 0) {
             graphs[id].opts.data = { data: filteredData };
