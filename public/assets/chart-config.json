@@ -85,7 +85,7 @@
     "24167887": {
     "title": "",
     "subtitle": "",
-    "dataset": "operating_plants_map_sept2025_30k",
+    "dataset": "operating_plants_map_sept2025",
     "initial_state": "World",
     "filterable": false,
     "filter_by": "Country/area",
