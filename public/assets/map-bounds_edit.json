@@ -48,8 +48,8 @@
     "lng_max": -69.39
   },
   "Australia": {
-    "lat_min": -43.24,
-    "lat_max": -12.01,
+    "lat_min": -40,
+    "lat_max": -15,
     "lng_min": 114.37,
     "lng_max": 153.94
   },
@@ -138,8 +138,8 @@
     "lng_max": 28.02
   },
   "Brazil": {
-    "lat_min": -34.16,
-    "lat_max": 3.47,
+    "lat_min": -30,
+    "lat_max": 0,
     "lng_min": -73.17,
     "lng_max": -34.42
   },
@@ -204,8 +204,8 @@
     "lng_max": -67.65
   },
   "China": {
-    "lat_min": 17.82,
-    "lat_max": 52.23,
+    "lat_min": 22,
+    "lat_max": 47.5,
     "lng_min": 74.26,
     "lng_max": 134.88
   },
@@ -342,10 +342,10 @@
     "lng_max": 30.93
   },
   "France": {
-    "lat_min": -21.43,
-    "lat_max": 51.55,
-    "lng_min": -5.29,
-    "lng_max": 56.14
+    "lat_min": 42,
+    "lat_max": 51,
+    "lng_min": -25,
+    "lng_max": 25
   },
   "French Guiana": {
     "lat_min": 4.56,
@@ -444,8 +444,8 @@
     "lng_max": -15.29
   },
   "India": {
-    "lat_min": 7.66,
-    "lat_max": 35.15,
+    "lat_min": 10,
+    "lat_max": 32,
     "lng_min": 68.07,
     "lng_max": 95.91
   },
@@ -498,8 +498,8 @@
     "lng_max": -76.25
   },
   "Japan": {
-    "lat_min": 23.57,
-    "lat_max": 45.97,
+    "lat_min": 28,
+    "lat_max": 44,
     "lng_min": 123.29,
     "lng_max": 145.16
   },
@@ -1056,8 +1056,8 @@
     "lng_max": 56.87
   },
   "United Kingdom": {
-    "lat_min": 35.65,
-    "lat_max": 60.96,
+    "lat_min": 50,
+    "lat_max": 60,
     "lng_min": -8.59,
     "lng_max": 2.83
   },

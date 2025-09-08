@@ -10,7 +10,7 @@ const tickers = {
 getData();
 
 async function getData() {
-    const urls = ["./assets/page-config.json", "./assets/chart-config.json", "./assets/text-config.json","./assets/map-bounds.json" ];
+    const urls = ["./assets/page-config.json", "./assets/chart-config.json", "./assets/text-config.json","./assets/map-bounds_edit.json" ];
     const keys = ["dashboard", "charts", "text", "mapBounds"];
     const promises = [];
     for (const url of urls) {
