@@ -101,11 +101,14 @@ function implementDropdown() {
     controlsContainer.appendChild(dropdownEl);
     controlsContainer.classList.add('controls-container--dropdown');
 
-dropdownEl.addEventListener('change', (evt) => {
-  const selectedValue = evt.target.value; // formatted
-  updateSummaries(selectedValue);
-  updateGraphs(selectedValue);
-});
+  const onSelect = (evt) => {
+    const selectedValue = evt.target.value; // formatted (underscored)
+    updateSummaries(selectedValue);
+    updateGraphs(selectedValue);
+  };
+  dropdownEl.addEventListener('change', onSelect, { passive: true });
+  dropdownEl.addEventListener('input', onSelect, { passive: true });
+  // ▲▲ Replace your old single 'change' listener with the block above
 }
 
 function implementFilterButtons() {
@@ -717,13 +720,25 @@ function updateGraphs(key) {
             return;
         }
         // Default update path for non-scatter charts
-        if (filteredData.length !== 0) {
-            graphs[id].opts.data = { data: filteredData };
-            graphs[id].flourish.update(graphs[id].opts);
-            document.querySelector(`#chart-${id} iframe`).style.opacity = 1;
-        } else {
-            document.querySelector(`#chart-${id} iframe`).style.opacity = 0.3;
-        }
+if (filteredData.length !== 0) {
+    graphs[id].flourish.update({
+        template: graphs[id].opts.template,
+        version: graphs[id].opts.version,
+        container: graphs[id].opts.container,
+        api_url: graphs[id].opts.api_url,
+        api_key: graphs[id].opts.api_key,
+        base_visualisation_id: id,
+        bindings: graphs[id].opts.bindings,
+        state: graphs[id].opts.state,
+        data: { data: filteredData },
+        animate: true
+    });
+    const iframe = document.querySelector(`#chart-${id} iframe`);
+    if (iframe) iframe.style.opacity = 1;
+} else {
+    const iframe = document.querySelector(`#chart-${id} iframe`);
+    if (iframe) iframe.style.opacity = 0.3;
+}
     });
 }
 
@@ -751,8 +766,10 @@ function initialData(id) {
     let data = config.datasets[id];
     if (config.charts[id].filterable) {
         if (typeof config.charts[id].filter_by === 'string') {
-            data = config.datasets[id].filter(entry => entry[config.dashboard.input_filter] === config.charts[id].initial_state);
-        } else {
+    const by = config.charts[id].filter_by;
+    const target = formatName(config.charts[id].initial_state);
+    data = config.datasets[id].filter(entry => formatName(entry[by]) === target);
+} else {
             const defaultFilter = config.dashboard.input_default;
             if (defaultFilter === "All") return data;
             else return filterDataOnColumnName(formatName(defaultFilter), id)
