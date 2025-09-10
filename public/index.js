@@ -101,11 +101,11 @@ function implementDropdown() {
     controlsContainer.appendChild(dropdownEl);
     controlsContainer.classList.add('controls-container--dropdown');
 
-    dropdownEl.addEventListener('change', (evt) => {
-        const selectedValue = evt.target.value;
-        updateSummaries(selectedValue);
-        updateGraphs(selectedValue);
-    })
+dropdownEl.addEventListener('change', (evt) => {
+  const selectedValue = evt.target.value; // formatted
+  updateSummaries(selectedValue);
+  updateGraphs(selectedValue);
+});
 }
 
 function implementFilterButtons() {
@@ -292,12 +292,15 @@ function insertChartSummary(id) {
 }
 
 function updateSummaries(key) {
-    const filterKey = (typeof config.dashboard.input_filter === 'string') ? config.dashboard.input_filter : config.dashboard.input_key;
-    const summaryTextObj = filterSummaries(filterKey, getSelectedText());
+  const filterKey = (typeof config.dashboard.input_filter === 'string')
+    ? config.dashboard.input_filter
+    : config.dashboard.input_key;
+  const selectedDisplay = getUnformattedInputName(key);
+  const summaryTextObj = filterSummaries(filterKey, selectedDisplay);
 
-    if (config.dashboard.overall_summary) updateOverallSummary(summaryTextObj);
-    if (config.dashboard.tickers) updateTickers(key);
-    updateGraphSummaries(key, summaryTextObj);
+  if (config.dashboard.overall_summary) updateOverallSummary(summaryTextObj);
+  if (config.dashboard.tickers) updateTickers(key);
+  updateGraphSummaries(key, summaryTextObj);
 }
 
 function filterSummaries(key, selected) {
@@ -660,42 +663,31 @@ function updateGraphs(key) {
             graphs[id]?.opts?.template === "@flourish/scatter" ||
             currentGraph?.type === "scatter";
 
-if (isScatter) {
+        if (isScatter) {
   const headers = ["Age Category","Type","Country","Type","Country","Type","Age Category","Capacity (GW)","Capacity %","Capacity %"];
   const rows = filteredData.map(d => {
-    const mw = d["Capacity (MW)"];
-    const gw = d["Capacity (GW)"];
-    const capGW = gw != null ? Number(gw) : (mw != null ? Number(mw) / 1000 : null);
-    return [
-      d["Age Category"],
-      d["Type"],
-      d["Country"],
-      d["Type"],
-      d["Country"],
-      d["Type"],
-      d["Age Category"],
-      capGW,
-      d["Capacity %"],
-      d["Capacity %"]
-    ];
+    const capGW = d["Capacity (GW)"] != null
+      ? Number(d["Capacity (GW)"])
+      : (d["Capacity (MW)"] != null ? Number(String(d["Capacity (MW)"]).replace(/[, ]+/g,''))/1000 : null);
+    return [d["Age Category"], d["Type"], d["Country"], d["Type"], d["Country"], d["Type"], d["Age Category"], capGW, d["Capacity %"], d["Capacity %"]];
   });
 
   const payload = {
     template: "@flourish/scatter",
     version: graphs[id].opts?.version || "33.4.2",
-    bindings: { data: { name: [], x: 0, color: 1, filter: 2, y: 3, metadata: [4,5,6,7,8], size: 9 } },
+    container: `#chart-${id}`,
+    api_url: "/flourish",
+    api_key: "",
+    base_visualisation_id: id,
+    bindings: { data: { name: [], x:0, color:1, filter:2, y:3, metadata:[4,5,6,7,8], size:9 } },
     data: { data: [headers, ...rows] },
     state: graphs[id].opts?.state || {},
     animate: true
   };
 
-  graphs[id].opts.bindings = payload.bindings;
-  graphs[id].opts.data = payload.data;
   graphs[id].flourish.update(payload);
-
   const iframe = document.querySelector(`#chart-${id} iframe`);
   if (iframe) iframe.style.opacity = rows.length ? 1 : 0.3;
-
   return;
 }
         const isHierarchy =
@@ -770,15 +762,15 @@ function initialData(id) {
 }
 
 function filterDataOnColumnName(key, id) {
-    const filterValue = getUnformattedInputName(key);
-    const x_value = config.charts[id].x_axis;
-    filteredData = config.datasets[id].map(entry => {
-        let output = {};
-        output[filterValue] = entry[filterValue];
-        output[x_value] = entry[x_value];
-        return output;
-    });
-    return filteredData;
+  const filterValue = getUnformattedInputName(key);
+  const x_value = config.charts[id].x_axis;
+  const filteredData = config.datasets[id].map(entry => {
+    const output = {};
+    output[filterValue] = entry[filterValue];
+    output[x_value] = entry[x_value];
+    return output;
+  });
+  return filteredData;
 }
 
 function initialTickerData() {
