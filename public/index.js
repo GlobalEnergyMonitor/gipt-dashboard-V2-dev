@@ -10,7 +10,7 @@ const tickers = {
 getData();
 
 async function getData() {
-    const urls = ["./assets/page-config.json", "./assets/chart-config.json", "./assets/text-config.json","./assets/map-bounds_edit.json" ];
+    const urls = ["./assets/page-config.json", "./assets/chart-config.json", "./assets/text-config.json", "./assets/map-bounds_edit.json"];
     const keys = ["dashboard", "charts", "text", "mapBounds"];
     const promises = [];
     for (const url of urls) {
@@ -340,22 +340,22 @@ function implentGraph(id) {
         const fullData = config.datasets["24167887"];
         const selected = getSelectedText();
 
-let filtered;
-if (selected.toLowerCase() === "world") {
-  filtered = fullData;
-} else {
-  filtered = fullData.filter(entry => {
-    const country = entry["Country/area"]?.trim().toLowerCase();
+        let filtered;
+        if (selected.toLowerCase() === "world") {
+            filtered = fullData;
+        } else {
+            filtered = fullData.filter(entry => {
+                const country = entry["Country/area"]?.trim().toLowerCase();
 
-    // Handle Region as array of strings
-    const regions = Array.isArray(entry["Region"])
-      ? entry["Region"].map(r => r.trim().toLowerCase())
-      : [];
+                // Handle Region as array of strings
+                const regions = Array.isArray(entry["Region"])
+                    ? entry["Region"].map(r => r.trim().toLowerCase())
+                    : [];
 
-    return country === selected.trim().toLowerCase() ||
-           regions.includes(selected.trim().toLowerCase());
-  });
-}
+                return country === selected.trim().toLowerCase() ||
+                    regions.includes(selected.trim().toLowerCase());
+            });
+        }
 
         const headers = [
             "Type", "Latitude", "Longitude",
@@ -379,8 +379,7 @@ if (selected.toLowerCase() === "world") {
         const container = document.querySelector(`#${containerId}`);
         container.innerHTML = "";
 
-let bounds = config.mapBounds[selected] || config.mapBounds["World"];
-
+        let bounds = config.mapBounds[selected] || config.mapBounds["World"];
 
         const chart = new Flourish.Live({
             template: "@flourish/time-map",
@@ -417,7 +416,7 @@ let bounds = config.mapBounds[selected] || config.mapBounds["World"];
         graphs[id].flourish = chart;
         return;
     }
-    // SCatter
+    // Scatter
     fetch(`https://public.flourish.studio/visualisation/${id}/visualisation.json`)
         .then((response) => response.json())
         .then((options) => {
@@ -567,22 +566,22 @@ function updateGraphs(key) {
             const fullData = config.datasets[id];
             const selected = getUnformattedInputName(key);
 
-let filtered;
-if (selected.toLowerCase() === "world") {
-  filtered = fullData;
-} else {
-  filtered = fullData.filter(entry => {
-    const country = entry["Country/area"]?.trim().toLowerCase();
+            let filtered;
+            if (selected.toLowerCase() === "world") {
+                filtered = fullData;
+            } else {
+                filtered = fullData.filter(entry => {
+                    const country = entry["Country/area"]?.trim().toLowerCase();
 
-    // Handle Region as array of strings
-    const regions = Array.isArray(entry["Region"])
-      ? entry["Region"].map(r => r.trim().toLowerCase())
-      : [];
+                    // Handle Region as array of strings
+                    const regions = Array.isArray(entry["Region"])
+                        ? entry["Region"].map(r => r.trim().toLowerCase())
+                        : [];
 
-    return country === selected.trim().toLowerCase() ||
-           regions.includes(selected.trim().toLowerCase());
-  });
-}
+                    return country === selected.trim().toLowerCase() ||
+                        regions.includes(selected.trim().toLowerCase());
+                });
+            }
 
             const headers = [
                 "Type", "Latitude", "Longitude",
@@ -605,7 +604,7 @@ if (selected.toLowerCase() === "world") {
             const container = document.querySelector(`#${containerId}`);
             container.innerHTML = "";
 
-let bounds = config.mapBounds[selected] || config.mapBounds["World"];
+            let bounds = config.mapBounds[selected] || config.mapBounds["World"];
 
 
             const chart = new Flourish.Live({
@@ -642,7 +641,7 @@ let bounds = config.mapBounds[selected] || config.mapBounds["World"];
             return;
         }
 
-        
+
         // Filter data for all other charts
         let filteredData = config.datasets[id];
         if (currentGraph.filterable) {
@@ -661,67 +660,70 @@ let bounds = config.mapBounds[selected] || config.mapBounds["World"];
             graphs[id]?.opts?.template === "@flourish/scatter" ||
             currentGraph?.type === "scatter";
 
-        if (isScatter) {
-            const allData = config.datasets[id];
-            const filterField = currentGraph.filter_by || "Country";
+if (isScatter) {
+  const headers = ["Age Category","Type","Country","Type","Country","Type","Age Category","Capacity (GW)","Capacity %","Capacity %"];
+  const rows = filteredData.map(d => {
+    const mw = d["Capacity (MW)"];
+    const gw = d["Capacity (GW)"];
+    const capGW = gw != null ? Number(gw) : (mw != null ? Number(mw) / 1000 : null);
+    return [
+      d["Age Category"],
+      d["Type"],
+      d["Country"],
+      d["Type"],
+      d["Country"],
+      d["Type"],
+      d["Age Category"],
+      capGW,
+      d["Capacity %"],
+      d["Capacity %"]
+    ];
+  });
 
-            const headers = [
-                "Age Category", "Type", "Country", "Type", "Country", "Type", "Age Category", "Capacity (GW)", "Capacity %", "Capacity %"
-            ];
+  const payload = {
+    template: "@flourish/scatter",
+    version: graphs[id].opts?.version || "33.4.2",
+    bindings: { data: { name: [], x: 0, color: 1, filter: 2, y: 3, metadata: [4,5,6,7,8], size: 9 } },
+    data: { data: [headers, ...rows] },
+    state: graphs[id].opts?.state || {},
+    animate: true
+  };
 
-            const rows = filteredData.map(d => {
-                const capGW =
-                    d["Capacity (GW)"] != null ? d["Capacity (GW)"]
-                        : (d["Capacity (MW)"] != null ? Number(d["Capacity (MW)"]) / 1000 : null);
+  graphs[id].opts.bindings = payload.bindings;
+  graphs[id].opts.data = payload.data;
+  graphs[id].flourish.update(payload);
 
-                return [
-                    d["Age Category"],
-                    d["Type"],
-                    d["Country"],
-                    d["Type"],
-                    d["Country"],
-                    d["Type"],
-                    d["Age Category"],
-                    capGW,
-                    d["Capacity %"],
-                    d["Capacity %"]
-                ];
+  const iframe = document.querySelector(`#chart-${id} iframe`);
+  if (iframe) iframe.style.opacity = rows.length ? 1 : 0.3;
+
+  return;
+}
+        const isHierarchy =
+            graphs[id]?.opts?.template === "@flourish/hierarchy" ||
+            ["23191160", "23185423"].includes(id);
+
+        if (isHierarchy) {
+            let filteredData = [];
+
+            if (!config.datasets[id]) {
+                console.warn(`No dataset found for graph ${id}`);
+            } else if (currentGraph?.filterable && currentGraph?.filter_by) {
+                filteredData = config.datasets[id].filter(entry =>
+                    formatName(entry[currentGraph.filter_by]) === key
+                );
+            } else {
+                filteredData = config.datasets[id];
+            }
+
+            graphs[id].flourish.update({
+                template: graphs[id].opts.template,            // ✅ required for animation
+                bindings: graphs[id].opts.bindings,            // ✅ required for popup, nesting
+                data: { data: filteredData },                  // ✅ updated data
+                animate: true                                  // ✅ animation request
             });
-
-            graphs[id].opts.bindings = {
-                data: { name: [], x: 0, color: 1, filter: 2, y: 3, metadata: [4, 5, 6, 7, 8], size: 9 }
-            };
-            graphs[id].opts.data = { data: [headers, ...rows] };
-            graphs[id].flourish.update(graphs[id].opts);
 
             return;
         }
-        const isHierarchy =
-    graphs[id]?.opts?.template === "@flourish/hierarchy" ||
-    ["23191160", "23185423"].includes(id);
-
-if (isHierarchy) {
-    let filteredData = [];
-
-    if (!config.datasets[id]) {
-        console.warn(`No dataset found for graph ${id}`);
-    } else if (currentGraph?.filterable && currentGraph?.filter_by) {
-        filteredData = config.datasets[id].filter(entry =>
-            formatName(entry[currentGraph.filter_by]) === key
-        );
-    } else {
-        filteredData = config.datasets[id];
-    }
-
-    graphs[id].flourish.update({
-        template: graphs[id].opts.template,            // ✅ required for animation
-        bindings: graphs[id].opts.bindings,            // ✅ required for popup, nesting
-        data: { data: filteredData },                  // ✅ updated data
-        animate: true                                  // ✅ animation request
-    });
-
-    return;
-}
         // Default update path for non-scatter charts
         if (filteredData.length !== 0) {
             graphs[id].opts.data = { data: filteredData };
