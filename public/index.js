@@ -560,91 +560,90 @@ function implentGraph(id) {
 
 function updateGraphs(key) {
   const graphIDs = config.dashboard.flourish_ids;
+  const selectedDisplay = getUnformattedInputName(key); // 🔑 always convert once
 
   graphIDs.forEach(id => {
     const currentGraph = config.charts[id];
 
-    // Special case for the time-map chart
-if (id === "24167887") {
-  const selected = getUnformattedInputName(key);
-  renderMap(id, selected);
-  return;
-}
+    // --- Special case for the time-map ---
+    if (id === "24167887") {
+      renderMap(id, selectedDisplay);
+      return;
+    }
 
-        // Filter data for all other charts
-        let filteredData = config.datasets[id];
-        if (currentGraph.filterable) {
-            if (typeof currentGraph.filter_by === 'string') {
-                filteredData = config.datasets[id].filter(entry =>
-                    formatName(entry[currentGraph.filter_by]) === key
-                );
-            } else {
-                filteredData = (getUnformattedInputName(key) === 'All')
-                    ? config.datasets[id]
-                    : filterDataOnColumnName(key, id);
-            }
-        }
+    // --- Shared filtering logic ---
+    let filteredData = config.datasets[id];
+    if (currentGraph.filterable) {
+      if (typeof currentGraph.filter_by === 'string') {
+        filteredData = config.datasets[id].filter(entry =>
+          entry[currentGraph.filter_by] === selectedDisplay
+        );
+      } else {
+        filteredData = (selectedDisplay === 'All')
+          ? config.datasets[id]
+          : filterDataOnColumnName(formatName(selectedDisplay), id);
+      }
+    }
 
-        const isScatter =
-            graphs[id]?.opts?.template === "@flourish/scatter" ||
-            currentGraph?.type === "scatter";
+    // --- Scatter charts ---
+    const isScatter =
+      graphs[id]?.opts?.template === "@flourish/scatter" ||
+      currentGraph?.type === "scatter";
 
-        if (isScatter) {
-  const headers = ["Age Category","Type","Country","Type","Country","Type","Age Category","Capacity (GW)","Capacity %","Capacity %"];
-  const rows = filteredData.map(d => {
-    const capGW = d["Capacity (GW)"] != null
-      ? Number(d["Capacity (GW)"])
-      : (d["Capacity (MW)"] != null ? Number(String(d["Capacity (MW)"]).replace(/[, ]+/g,''))/1000 : null);
-    return [d["Age Category"], d["Type"], d["Country"], d["Type"], d["Country"], d["Type"], d["Age Category"], capGW, d["Capacity %"], d["Capacity %"]];
-  });
+    if (isScatter) {
+      const headers = [
+        "Age Category","Type","Country","Type","Country","Type",
+        "Age Category","Capacity (GW)","Capacity %","Capacity %"
+      ];
+      const rows = filteredData.map(d => {
+        const capGW = d["Capacity (GW)"] != null
+          ? Number(d["Capacity (GW)"])
+          : (d["Capacity (MW)"] != null
+              ? Number(String(d["Capacity (MW)"]).replace(/[, ]+/g,'')) / 1000
+              : null);
+        return [
+          d["Age Category"], d["Type"], d["Country"], d["Type"], d["Country"],
+          d["Type"], d["Age Category"], capGW, d["Capacity %"], d["Capacity %"]
+        ];
+      });
 
-  const payload = {
-    template: "@flourish/scatter",
-    version: graphs[id].opts?.version || "33.4.2",
-    container: `#chart-${id}`,
-    api_url: "/flourish",
-    api_key: "",
-    base_visualisation_id: id,
-    bindings: { data: { name: [], x:0, color:1, filter:2, y:3, metadata:[4,5,6,7,8], size:9 } },
-    data: { data: [headers, ...rows] },
-    state: graphs[id].opts?.state || {},
-    animate: true
-  };
+      const payload = {
+        template: "@flourish/scatter",
+        version: graphs[id].opts?.version || "33.4.2",
+        container: `#chart-${id}`,
+        api_url: "/flourish",
+        api_key: "",
+        base_visualisation_id: id,
+        bindings: { data: { name: [], x:0, color:1, filter:2, y:3, metadata:[4,5,6,7,8], size:9 } },
+        data: { data: [headers, ...rows] },
+        state: graphs[id].opts?.state || {},
+        animate: true
+      };
 
-  graphs[id].flourish.update(payload);
-  const iframe = document.querySelector(`#chart-${id} iframe`);
-  if (iframe) iframe.style.opacity = rows.length ? 1 : 0.3;
-  return;
-}
-        const isHierarchy =
-            graphs[id]?.opts?.template === "@flourish/hierarchy" ||
-            ["23191160", "23185423"].includes(id);
+      graphs[id].flourish.update(payload);
+      const iframe = document.querySelector(`#chart-${id} iframe`);
+      if (iframe) iframe.style.opacity = rows.length ? 1 : 0.3;
+      return;
+    }
 
-        if (isHierarchy) {
-            let filteredData = [];
+    // --- Hierarchy charts ---
+    const isHierarchy =
+      graphs[id]?.opts?.template === "@flourish/hierarchy" ||
+      ["23191160", "23185423"].includes(id);
 
-            if (!config.datasets[id]) {
-                console.warn(`No dataset found for graph ${id}`);
-            } else if (currentGraph?.filterable && currentGraph?.filter_by) {
-                filteredData = config.datasets[id].filter(entry =>
-                    formatName(entry[currentGraph.filter_by]) === key
-                );
-            } else {
-                filteredData = config.datasets[id];
-            }
+    if (isHierarchy) {
+      graphs[id].flourish.update({
+        template: graphs[id].opts.template,
+        bindings: graphs[id].opts.bindings,
+        data: { data: filteredData },
+        animate: true
+      });
+      return;
+    }
 
-            graphs[id].flourish.update({
-                template: graphs[id].opts.template,            // ✅ required for animation
-                bindings: graphs[id].opts.bindings,            // ✅ required for popup, nesting
-                data: { data: filteredData },                  // ✅ updated data
-                animate: true                                  // ✅ animation request
-            });
-
-            return;
-        }
-        // Default update path for non-scatter charts
-if (filteredData.length !== 0) {
-    graphs[id].flourish.update({
+    // --- Default update path ---
+    if (filteredData.length !== 0) {
+      graphs[id].flourish.update({
         template: graphs[id].opts.template,
         version: graphs[id].opts.version,
         container: graphs[id].opts.container,
@@ -655,14 +654,14 @@ if (filteredData.length !== 0) {
         state: graphs[id].opts.state,
         data: { data: filteredData },
         animate: true
-    });
-    const iframe = document.querySelector(`#chart-${id} iframe`);
-    if (iframe) iframe.style.opacity = 1;
-} else {
-    const iframe = document.querySelector(`#chart-${id} iframe`);
-    if (iframe) iframe.style.opacity = 0.3;
-}
-    });
+      });
+      const iframe = document.querySelector(`#chart-${id} iframe`);
+      if (iframe) iframe.style.opacity = 1;
+    } else {
+      const iframe = document.querySelector(`#chart-${id} iframe`);
+      if (iframe) iframe.style.opacity = 0.3;
+    }
+  });
 }
 
 function formatName(string) {
