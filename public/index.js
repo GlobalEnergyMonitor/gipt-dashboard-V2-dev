@@ -598,27 +598,6 @@ const isScatter =
   currentGraph?.type === "scatter";
 
 if (isScatter) {
-  console.groupCollapsed(`updateGraphs → scatter [${id}]`);
-  const norm = s => String(s ?? "").toLowerCase().replace(/ /g, "_");
-  console.log("1) Selection", {selectedDisplay, normalized: norm(selectedDisplay)});
-  console.log("2) Chart config", {
-    id,
-    filterable: !!currentGraph?.filterable,
-    filter_by: currentGraph?.filter_by,
-    title: currentGraph?.title,
-    subtitle: currentGraph?.subtitle
-  });
-
-  console.log("3) Filtered dataset", {rowCount: filteredData.length});
-  console.table(filteredData.slice(0, 12).map(d => ({
-    Country: d["Country"],
-    Type: d["Type"],
-    Age: d["Age Category"],
-    "MW": d["Capacity (MW)"],
-    "%": d["Capacity %"]
-  })));
-
-  // Flourish expects a 10-column table in this exact order:
   const headers = [
     "Age Category","Type","Country","Type","Country","Type",
     "Age Category","Capacity (GW)","Capacity %","Capacity %"
@@ -635,39 +614,32 @@ if (isScatter) {
     ];
   });
 
-  // Build payload
-  const payload = {
-    template: "@flourish/scatter",
-    version: graphs[id].opts?.version || "33.4.2",
-    container: `#chart-${id}`,
-    api_url: "/flourish",
-    api_key: "",
-    base_visualisation_id: id,
-    bindings: { data: { name: [], x:0, color:1, filter:2, y:3, metadata:[4,5,6,7,8], size:9 } },
-    data: { data: [headers, ...rows] },
-    state: {
-      layout: {
-        title: (currentGraph.title || '').replace('{{country}}', selectedDisplay),
-        subtitle: currentGraph.subtitle || ''
-      }
-    },
-    animate: false   // ✅ prevents the “one step behind” bug
-  };
-
   if (graphs[id]?.flourish) {
-    graphs[id].flourish.update(payload);
+    // 1) Data update (no title/subtitle), immediate
+    graphs[id].flourish.update({
+      template: "@flourish/scatter",
+      bindings: { data: { name: [], x:0, color:1, filter:2, y:3, metadata:[4,5,6,7,8], size:9 } },
+      data: { data: [headers, ...rows] },
+      animate: false
+    });
+
+    // 2) Layout update on the next frame
+    requestAnimationFrame(() => {
+      graphs[id].flourish.update({
+        state: {
+          layout: {
+            title: (currentGraph.title || '').replace('{{country}}', selectedDisplay),
+            subtitle: currentGraph.subtitle || ''
+          }
+        },
+        animate: false
+      });
+    });
+
     const iframe = document.querySelector(`#chart-${id} iframe`);
     if (iframe) iframe.style.opacity = rows.length ? 1 : 0.3;
-  } else {
-    console.warn("Flourish instance missing for", id);
   }
 
-  console.log("7) Payload summary", {
-    rows: rows.length,
-    bindings: payload.bindings.data,
-    hasFlourishInstance: !!graphs[id]?.flourish
-  });
-  console.groupEnd();
   return;
 }
 
