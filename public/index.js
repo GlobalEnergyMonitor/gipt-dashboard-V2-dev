@@ -102,13 +102,14 @@ function implementDropdown() {
     controlsContainer.classList.add('controls-container--dropdown');
 
   const onSelect = (evt) => {
-    const selectedValue = evt.target.value; // formatted (underscored)
+    const selectedValue = evt.target.value;
+    console.log(`[dropdown] ${evt.type} fired → ${selectedValue}`);
     updateSummaries(selectedValue);
     updateGraphs(selectedValue);
   };
+
+  // IMPORTANT: use only 'change' while we debug
   dropdownEl.addEventListener('change', onSelect, { passive: true });
-  dropdownEl.addEventListener('input', onSelect, { passive: true });
-  // ▲▲ Replace your old single 'change' listener with the block above
 }
 
 function implementFilterButtons() {
@@ -247,26 +248,6 @@ function formatWithTickerStyling(data, id) {
     return text.replace('<span>', styledSpan);
 }
 
-function renderVisualisation() {
-    const graphIDs = config.dashboard.flourish_ids;
-
-    graphIDs.forEach(id => {
-        const container = document.createElement('div');
-        container.id = `chart-${id}`;
-        container.classList.add('chart-container');
-
-        // Add special layout class for the time-map chart
-        if (String(id) === "24167887") {
-            container.classList.add('map-chart-container');
-        }
-
-        document.querySelector('.flourish-container').appendChild(container);
-
-        insertChartSummary(id);
-        implentGraph(id);
-    });
-}
-
 function insertOverallSummary() {
     let summaryObj = config.text[(config.dashboard.input_type === 'dropdown') ? 'dropdown' : 'buttons'];
     const filterKey = (typeof config.dashboard.input_filter === 'string') ? config.dashboard.input_filter : config.dashboard.input_key;
@@ -338,90 +319,106 @@ function updateGraphSummaries(key, summaryTextObj) {
     });
 }
 
+function renderVisualisation() {
+  const graphIDs = config.dashboard.flourish_ids;
+
+  graphIDs.forEach(id => {
+    if (document.querySelector(`#chart-${id}`)) return; // 🔑 prevent duplicates
+
+    const container = document.createElement('div');
+    container.id = `chart-${id}`;
+    container.classList.add('chart-container');
+
+    if (String(id) === "24167887") {
+      container.classList.add('map-chart-container');
+    }
+
+    document.querySelector('.flourish-container').appendChild(container);
+
+    insertChartSummary(id);
+    implentGraph(id);
+  });
+}
+
+function renderMap(id, selected) {
+  const fullData = config.datasets[id];
+
+  let filtered = (selected.toLowerCase() === "world")
+    ? fullData
+    : fullData.filter(entry => {
+        const country = entry["Country/area"]?.trim().toLowerCase();
+        const regions = Array.isArray(entry["Region"])
+          ? entry["Region"].map(r => r.trim().toLowerCase())
+          : [];
+        return country === selected.trim().toLowerCase() ||
+               regions.includes(selected.trim().toLowerCase());
+      });
+
+  const headers = [
+    "Plant / Project name","Capacity (MW)","Technology","Country/area",
+    "Latitude","Longitude","Type","Capacity (MW)","Type"
+  ];
+
+  const mapped = filtered.map(entry => [
+    entry["Plant / Project name"],
+    entry["Capacity (MW)"],
+    entry["Technology"],
+    entry["Country/area"],
+    entry["Latitude"],
+    entry["Longitude"],
+    entry["Type"],
+    entry["Capacity (MW)"],
+    entry["Type"]
+  ]);
+
+  const bounds = config.mapBounds[selected] || config.mapBounds["World"];
+  const containerId = `chart-${id}`;
+  const container = document.querySelector(`#${containerId}`);
+
+  // ✅ Hard reset: nuke any existing Flourish iframe
+  const oldIframe = container.querySelector("iframe");
+  if (oldIframe) oldIframe.remove();
+
+  // ✅ Now draw fresh map
+  graphs[id] = graphs[id] || {};
+  graphs[id].flourish = new Flourish.Live({
+    template: "@flourish/time-map",
+    version: "17.5.2",
+    bindings: {
+      events: { metadata:[0,1,2,3], lat:4, lon:5, name:6, scale:7, color:8 },
+      lines: { geojson:0, series:1 },
+      regions: { geojson:0 },
+      regions_map: { geojson:0, metadata:[], name:1, value:[2] }
+    },
+    container: `#${containerId}`,
+    api_url: "/flourish",
+    api_key: "ZkqdL7nzFCQAihbjv-7j0UIm_r3rCCq-IYy4JfCahp9Qs-_dmIGzLn4O_DpcEhiv",
+    base_visualisation_id: id,
+    data: { events: [headers, ...mapped] },
+    state: {
+      ...config.charts[id]?.state,
+      map: {
+        ...(config.charts[id]?.state?.map || {}),
+        map_initial_bounds_lat_min: bounds.lat_min,
+        map_initial_bounds_lat_max: bounds.lat_max,
+        map_initial_bounds_lng_min: bounds.lng_min,
+        map_initial_bounds_lng_max: bounds.lng_max,
+        map_initial_type: "bounding_box"
+      }
+    }
+  });
+}
 
 function implentGraph(id) {
-    graphs[id] = {};
-    // Special case for the time-map chart
-    if (id === "24167887") {
-        const fullData = config.datasets["24167887"];
-        const selected = getSelectedText();
+  graphs[id] = {};
 
-        let filtered;
-        if (selected.toLowerCase() === "world") {
-            filtered = fullData;
-        } else {
-            filtered = fullData.filter(entry => {
-                const country = entry["Country/area"]?.trim().toLowerCase();
+  // Special case for the time-map chart
+  if (id === "24167887") {
+  const selected = getSelectedText();
+  renderMap(id, selected);
+  return;
+}
 
-                // Handle Region as array of strings
-                const regions = Array.isArray(entry["Region"])
-                    ? entry["Region"].map(r => r.trim().toLowerCase())
-                    : [];
-
-                return country === selected.trim().toLowerCase() ||
-                    regions.includes(selected.trim().toLowerCase());
-            });
-        }
-
-        const headers = [
-            "Type", "Latitude", "Longitude",
-            "Plant / Project name", "Capacity (MW)", "Technology",
-            "Country/area", "Type", "Capacity (MW)"
-        ];
-
-        const mapped = filtered.map(entry => [
-            entry["Type"],
-            entry["Latitude"],
-            entry["Longitude"],
-            entry["Plant / Project name"],
-            entry["Capacity (MW)"],
-            entry["Technology"],
-            entry["Country/area"],
-            entry["Type"],
-            entry["Capacity (MW)"]
-        ]);
-
-        const containerId = `chart-${id}`;
-        const container = document.querySelector(`#${containerId}`);
-        container.innerHTML = "";
-
-        let bounds = config.mapBounds[selected] || config.mapBounds["World"];
-
-        const chart = new Flourish.Live({
-            template: "@flourish/time-map",
-            container: `#${containerId}`,
-            api_url: "/flourish",
-            api_key: "ZkqdL7nzFCQAihbjv-7j0UIm_r3rCCq-IYy4JfCahp9Qs-_dmIGzLn4O_DpcEhiv",
-            base_visualisation_id: id,
-            state: {
-                map: {
-                    map_initial_bounds_lat_min: bounds.lat_min,
-                    map_initial_bounds_lat_max: bounds.lat_max,
-                    map_initial_bounds_lng_min: bounds.lng_min,
-                    map_initial_bounds_lng_max: bounds.lng_max,
-                    map_initial_type: "bounding_box",
-                    points: { opacity: 60 },
-                    style_base: "flourish-light"
-                }
-            },
-            bindings: {
-                events: {
-                    color: 0,
-                    lat: 1,
-                    lon: 2,
-                    metadata: [3, 4, 5, 6],
-                    name: 7,
-                    scale: 8,
-                }
-            },
-            data: {
-                events: [headers, ...mapped]   // 
-            }
-        });
-
-        graphs[id].flourish = chart;
-        return;
-    }
     // Scatter
     fetch(`https://public.flourish.studio/visualisation/${id}/visualisation.json`)
         .then((response) => response.json())
@@ -562,91 +559,17 @@ function implentGraph(id) {
 }
 
 function updateGraphs(key) {
-    const graphIDs = config.dashboard.flourish_ids;
+  const graphIDs = config.dashboard.flourish_ids;
 
-    graphIDs.forEach(id => {
-        const currentGraph = config.charts[id];
+  graphIDs.forEach(id => {
+    const currentGraph = config.charts[id];
 
-        //  Special case for the time-map chart (kept from your file)
-        if (id === "24167887") {
-            const fullData = config.datasets[id];
-            const selected = getUnformattedInputName(key);
-
-            let filtered;
-            if (selected.toLowerCase() === "world") {
-                filtered = fullData;
-            } else {
-                filtered = fullData.filter(entry => {
-                    const country = entry["Country/area"]?.trim().toLowerCase();
-
-                    // Handle Region as array of strings
-                    const regions = Array.isArray(entry["Region"])
-                        ? entry["Region"].map(r => r.trim().toLowerCase())
-                        : [];
-
-                    return country === selected.trim().toLowerCase() ||
-                        regions.includes(selected.trim().toLowerCase());
-                });
-            }
-
-            const headers = [
-                "Type", "Latitude", "Longitude",
-                "Plant / Project name", "Capacity (MW)", "Technology",
-                "Country/area", "Type", "Capacity (MW)"
-            ];
-            const mapped = filtered.map(entry => [
-                entry["Type"],
-                entry["Latitude"],
-                entry["Longitude"],
-                entry["Plant / Project name"],
-                entry["Capacity (MW)"],
-                entry["Technology"],
-                entry["Country/area"],
-                entry["Type"],
-                entry["Capacity (MW)"]
-            ]);
-
-            const containerId = `chart-${id}`;
-            const container = document.querySelector(`#${containerId}`);
-            container.innerHTML = "";
-
-            let bounds = config.mapBounds[selected] || config.mapBounds["World"];
-
-
-            const chart = new Flourish.Live({
-                template: "@flourish/time-map",
-                container: `#${containerId}`,
-                api_url: "/flourish",
-                api_key: "ZkqdL7nzFCQAihbjv-7j0UIm_r3rCCq-IYy4JfCahp9Qs-_dmIGzLn4O_DpcEhiv",
-                base_visualisation_id: id,
-                state: {
-                    map: {
-                        map_initial_bounds_lat_min: bounds.lat_min,
-                        map_initial_bounds_lat_max: bounds.lat_max,
-                        map_initial_bounds_lng_min: bounds.lng_min,
-                        map_initial_bounds_lng_max: bounds.lng_max,
-                        map_initial_type: "bounding_box",
-                        points: { opacity: 60 },
-                        style_base: "flourish-light"
-                    }
-                },
-                bindings: {
-                    events: {
-                        color: 0, lat: 1, lon: 2,
-                        metadata: [3, 4, 5, 6],
-                        name: 7,
-                        scale: 8,
-                    }
-                },
-                data: {
-                    events: [headers, ...mapped]   // ← fix the .mapped typo from your file
-                }
-            });
-
-            graphs[id].flourish = chart;
-            return;
-        }
-
+    // Special case for the time-map chart
+if (id === "24167887") {
+  const selected = getUnformattedInputName(key);
+  renderMap(id, selected);
+  return;
+}
 
         // Filter data for all other charts
         let filteredData = config.datasets[id];
