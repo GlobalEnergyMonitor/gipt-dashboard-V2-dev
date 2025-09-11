@@ -74,41 +74,45 @@ async function getData() {
         })
 }
 
-
 function implementDropdown() {
-    if (!config.text.dropdown_label) throw new Error('input_label not found or does not match input type. Check page and text configs');
-    const label = document.createElement('label');
-    label.innerHTML = markdownToHTML(config.text.dropdown_label);
-    label.for = "dropdown-selection"
-    const dropdownEl = document.createElement('select');
-    dropdownEl.id = "dropdown-selection";
+  if (!config.text.dropdown_label) {
+    throw new Error('input_label not found or does not match input type. Check page and text configs');
+  }
 
-    if (!config.text.dropdown) throw new Error('page-config specifies input of dropdown but text-config does not match')
+  const label = document.createElement('label');
+  label.innerHTML = markdownToHTML(config.text.dropdown_label);
+  label.for = "dropdown-selection";
 
-    let dropdownData = (typeof config.dashboard.input_filter === 'string') ?
-        config.text.dropdown.map(entry => entry[config.dashboard.input_filter]) :
-        config.dashboard.input_filter;
+  const dropdownEl = document.createElement('select');
+  dropdownEl.id = "dropdown-selection";
 
-    dropdownData.forEach(input => {
-        const opt = document.createElement('option');
-        opt.value = formatName(input);
-        opt.text = input;
-        dropdownEl.appendChild(opt);
-    });
+  if (!config.text.dropdown) {
+    throw new Error('page-config specifies input of dropdown but text-config does not match');
+  }
 
-    const controlsContainer = document.querySelector('.controls-container');
-    controlsContainer.appendChild(label);
-    controlsContainer.appendChild(dropdownEl);
-    controlsContainer.classList.add('controls-container--dropdown');
+  let dropdownData = (typeof config.dashboard.input_filter === 'string')
+    ? config.text.dropdown.map(entry => entry[config.dashboard.input_filter])
+    : config.dashboard.input_filter;
+
+  dropdownData.forEach(input => {
+    const opt = document.createElement('option');
+    opt.value = formatName(input); // formatted for uniqueness
+    opt.text = input;              // display string from dataset
+    dropdownEl.appendChild(opt);
+  });
+
+  const controlsContainer = document.querySelector('.controls-container');
+  controlsContainer.appendChild(label);
+  controlsContainer.appendChild(dropdownEl);
+  controlsContainer.classList.add('controls-container--dropdown');
 
   const onSelect = (evt) => {
-    const selectedValue = evt.target.value;
-    console.log(`[dropdown] ${evt.type} fired → ${selectedValue}`);
-    updateSummaries(selectedValue);
-    updateGraphs(selectedValue);
+    // ✅ Use the visible label directly instead of trying to reverse map
+    const selectedDisplay = evt.target.options[evt.target.selectedIndex].text;
+    updateSummaries(selectedDisplay);
+    updateGraphs(selectedDisplay);
   };
 
-  // IMPORTANT: use only 'change' while we debug
   dropdownEl.addEventListener('change', onSelect, { passive: true });
 }
 
@@ -275,18 +279,17 @@ function insertChartSummary(id) {
     }
 }
 
-function updateSummaries(key) {
+function updateSummaries(selectedDisplay) {
   const filterKey = (typeof config.dashboard.input_filter === 'string')
     ? config.dashboard.input_filter
     : config.dashboard.input_key;
-  const selectedDisplay = getUnformattedInputName(key);
+
   const summaryTextObj = filterSummaries(filterKey, selectedDisplay);
 
   if (config.dashboard.overall_summary) updateOverallSummary(summaryTextObj);
-  if (config.dashboard.tickers) updateTickers(key);
-  updateGraphSummaries(key, summaryTextObj);
+  if (config.dashboard.tickers) updateTickers(selectedDisplay);
+  updateGraphSummaries(selectedDisplay, summaryTextObj);
 }
-
 function filterSummaries(key, selected) {
     const summaryObj = config.text[(config.dashboard.input_type === 'dropdown') ? 'dropdown' : 'buttons'];
     return summaryObj.filter(entry => entry[key] === selected)[0];
@@ -297,28 +300,32 @@ function updateOverallSummary(summaryTextObj) {
         markdownToHTML((summaryTextObj.overall_summary) ? summaryTextObj.overall_summary : '');
 }
 
-function updateGraphSummaries(key, summaryTextObj) {
-    const graphIDs = config.dashboard.flourish_ids;
-    graphIDs.forEach(id => {
-        const currentGraph = config.charts[id];
-        if (currentGraph.filterable && currentGraph.summary) {
-            let filteredData;
-            if (typeof config.charts[id].filter_by === 'string') {
-                filteredData = config.datasets[id].filter(entry => formatName(entry[currentGraph.filter_by]) === key);
-            } else {
-                if (getUnformattedInputName(key) === 'All') filteredData = config.datasets[id];
-                else filteredData = filterDataOnColumnName(key, id);
-            }
-            const summary = document.querySelector(`#chart-${id} .chart-summary`);
-            if (summary) {
-                summary.innerHTML = markdownToHTML(
-                    (filteredData.length <= 0 || !summaryTextObj[currentGraph.summary]) ?
-                        config.text.no_data.replace("{{selected}}", summaryTextObj[config.dashboard.input_filter]) : summaryTextObj[currentGraph.summary]);
-            }
-        }
-    });
+function updateGraphSummaries(selectedDisplay, summaryTextObj) {
+  const graphIDs = config.dashboard.flourish_ids;
+  graphIDs.forEach(id => {
+    const currentGraph = config.charts[id];
+    if (currentGraph.filterable && currentGraph.summary) {
+      let filteredData;
+      if (typeof currentGraph.filter_by === 'string') {
+        filteredData = config.datasets[id].filter(entry =>
+  formatName(entry[currentGraph.filter_by]) === formatName(selectedDisplay)
+);
+      } else {
+        filteredData = (selectedDisplay === 'All')
+          ? config.datasets[id]
+          : filterDataOnColumnName(selectedDisplay, id);
+      }
+      const summary = document.querySelector(`#chart-${id} .chart-summary`);
+      if (summary) {
+        summary.innerHTML = markdownToHTML(
+          (filteredData.length <= 0 || !summaryTextObj[currentGraph.summary])
+            ? config.text.no_data.replace("{{selected}}", selectedDisplay)
+            : summaryTextObj[currentGraph.summary]
+        );
+      }
+    }
+  });
 }
-
 function renderVisualisation() {
   const graphIDs = config.dashboard.flourish_ids;
 
@@ -463,17 +470,16 @@ function implentGraph(id) {
                     api_key: "",
                     base_visualisation_id: id,
                     // Use index-based bindings to match the authored vis exactly
-                    bindings: {
-                        data: {
-                            name: [],
-                            x: 0,
-                            color: 1,
-                            filter: 2,
-                            y: 3,
-                            metadata: [4, 5, 6, 7, 8],
-                            size: 9
-                        }
-                    },
+bindings: {
+  data: {
+    name: [],
+    x: 0,
+    color: 1,
+    y: 3,
+    metadata: [4, 5, 6, 7, 8],
+    size: 9
+  }
+},
                     data: { data: [headers, ...rows] },
                     // Keep state minimal to avoid referencing missing columns
                     state: {
@@ -485,6 +491,7 @@ function implentGraph(id) {
                 };
 
                 graphs[id].flourish = new Flourish.Live(graphs[id].opts);
+                graphs[id].ready = true;
                 return;
             }
 
@@ -558,75 +565,114 @@ function implentGraph(id) {
         });
 }
 
-function updateGraphs(key) {
+function updateGraphs(selectedDisplay) {
   const graphIDs = config.dashboard.flourish_ids;
-  const selectedDisplay = getUnformattedInputName(key); // 🔑 always convert once
 
   graphIDs.forEach(id => {
     const currentGraph = config.charts[id];
 
-    // --- Special case for the time-map ---
+    // --- Map special case ---
     if (id === "24167887") {
       renderMap(id, selectedDisplay);
       return;
     }
 
-    // --- Shared filtering logic ---
+    // --- Shared filtering ---
     let filteredData = config.datasets[id];
     if (currentGraph.filterable) {
       if (typeof currentGraph.filter_by === 'string') {
         filteredData = config.datasets[id].filter(entry =>
-          entry[currentGraph.filter_by] === selectedDisplay
+          formatName(entry[currentGraph.filter_by]) === formatName(selectedDisplay)
         );
       } else {
         filteredData = (selectedDisplay === 'All')
           ? config.datasets[id]
-          : filterDataOnColumnName(formatName(selectedDisplay), id);
+          : filterDataOnColumnName(selectedDisplay, id);
       }
     }
 
-    // --- Scatter charts ---
-    const isScatter =
-      graphs[id]?.opts?.template === "@flourish/scatter" ||
-      currentGraph?.type === "scatter";
+    // --- Scatter ---
+// --- Scatter ---
+const isScatter =
+  graphs[id]?.opts?.template === "@flourish/scatter" ||
+  currentGraph?.type === "scatter";
 
-    if (isScatter) {
-      const headers = [
-        "Age Category","Type","Country","Type","Country","Type",
-        "Age Category","Capacity (GW)","Capacity %","Capacity %"
-      ];
-      const rows = filteredData.map(d => {
-        const capGW = d["Capacity (GW)"] != null
-          ? Number(d["Capacity (GW)"])
-          : (d["Capacity (MW)"] != null
-              ? Number(String(d["Capacity (MW)"]).replace(/[, ]+/g,'')) / 1000
-              : null);
-        return [
-          d["Age Category"], d["Type"], d["Country"], d["Type"], d["Country"],
-          d["Type"], d["Age Category"], capGW, d["Capacity %"], d["Capacity %"]
-        ];
-      });
+if (isScatter) {
+  console.groupCollapsed(`updateGraphs → scatter [${id}]`);
+  const norm = s => String(s ?? "").toLowerCase().replace(/ /g, "_");
+  console.log("1) Selection", {selectedDisplay, normalized: norm(selectedDisplay)});
+  console.log("2) Chart config", {
+    id,
+    filterable: !!currentGraph?.filterable,
+    filter_by: currentGraph?.filter_by,
+    title: currentGraph?.title,
+    subtitle: currentGraph?.subtitle
+  });
 
-      const payload = {
-        template: "@flourish/scatter",
-        version: graphs[id].opts?.version || "33.4.2",
-        container: `#chart-${id}`,
-        api_url: "/flourish",
-        api_key: "",
-        base_visualisation_id: id,
-        bindings: { data: { name: [], x:0, color:1, filter:2, y:3, metadata:[4,5,6,7,8], size:9 } },
-        data: { data: [headers, ...rows] },
-        state: graphs[id].opts?.state || {},
-        animate: true
-      };
+  console.log("3) Filtered dataset", {rowCount: filteredData.length});
+  console.table(filteredData.slice(0, 12).map(d => ({
+    Country: d["Country"],
+    Type: d["Type"],
+    Age: d["Age Category"],
+    "MW": d["Capacity (MW)"],
+    "%": d["Capacity %"]
+  })));
 
-      graphs[id].flourish.update(payload);
-      const iframe = document.querySelector(`#chart-${id} iframe`);
-      if (iframe) iframe.style.opacity = rows.length ? 1 : 0.3;
-      return;
-    }
+  // Flourish expects a 10-column table in this exact order:
+  const headers = [
+    "Age Category","Type","Country","Type","Country","Type",
+    "Age Category","Capacity (GW)","Capacity %","Capacity %"
+  ];
 
-    // --- Hierarchy charts ---
+  const rows = filteredData.map(d => {
+    const mw = d["Capacity (MW)"];
+    const gwFromMW = (mw == null || mw === "") ? null : Number(String(mw).replace(/[, ]+/g, "")) / 1000;
+    const gw = d["Capacity (GW)"] != null ? Number(d["Capacity (GW)"]) : gwFromMW;
+    const pct = d["Capacity %"] != null ? Number(d["Capacity %"]) : null;
+    return [
+      d["Age Category"], d["Type"], d["Country"], d["Type"], d["Country"],
+      d["Type"], d["Age Category"], gw, pct, pct
+    ];
+  });
+
+  // Build payload
+  const payload = {
+    template: "@flourish/scatter",
+    version: graphs[id].opts?.version || "33.4.2",
+    container: `#chart-${id}`,
+    api_url: "/flourish",
+    api_key: "",
+    base_visualisation_id: id,
+    bindings: { data: { name: [], x:0, color:1, filter:2, y:3, metadata:[4,5,6,7,8], size:9 } },
+    data: { data: [headers, ...rows] },
+    state: {
+      layout: {
+        title: (currentGraph.title || '').replace('{{country}}', selectedDisplay),
+        subtitle: currentGraph.subtitle || ''
+      }
+    },
+    animate: false   // ✅ prevents the “one step behind” bug
+  };
+
+  if (graphs[id]?.flourish) {
+    graphs[id].flourish.update(payload);
+    const iframe = document.querySelector(`#chart-${id} iframe`);
+    if (iframe) iframe.style.opacity = rows.length ? 1 : 0.3;
+  } else {
+    console.warn("Flourish instance missing for", id);
+  }
+
+  console.log("7) Payload summary", {
+    rows: rows.length,
+    bindings: payload.bindings.data,
+    hasFlourishInstance: !!graphs[id]?.flourish
+  });
+  console.groupEnd();
+  return;
+}
+
+
+    // --- Hierarchy ---
     const isHierarchy =
       graphs[id]?.opts?.template === "@flourish/hierarchy" ||
       ["23191160", "23185423"].includes(id);
@@ -641,7 +687,7 @@ function updateGraphs(key) {
       return;
     }
 
-    // --- Default update path ---
+    // --- Default ---
     if (filteredData.length !== 0) {
       graphs[id].flourish.update({
         template: graphs[id].opts.template,
@@ -700,18 +746,16 @@ function initialData(id) {
     return data;
 }
 
-function filterDataOnColumnName(key, id) {
-  const filterValue = getUnformattedInputName(key);
+function filterDataOnColumnName(selectedDisplay, id) {
   const x_value = config.charts[id].x_axis;
   const filteredData = config.datasets[id].map(entry => {
     const output = {};
-    output[filterValue] = entry[filterValue];
+    output[selectedDisplay] = entry[selectedDisplay];
     output[x_value] = entry[x_value];
     return output;
   });
   return filteredData;
 }
-
 function initialTickerData() {
     return config.datasets.ticker.data.filter(entry => entry[config.dashboard.input_filter] === config.dashboard.input_default);
 }
