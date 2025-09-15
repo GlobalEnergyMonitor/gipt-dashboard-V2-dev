@@ -591,7 +591,6 @@ function updateGraphs(selectedDisplay) {
       }
     }
 
-    // --- Scatter ---
 // --- Scatter ---
 const isScatter =
   graphs[id]?.opts?.template === "@flourish/scatter" ||
@@ -615,7 +614,7 @@ if (isScatter) {
   });
 
   if (graphs[id]?.flourish) {
-    // 1) Data update (no title/subtitle), immediate
+    // 1) Update data only
     graphs[id].flourish.update({
       template: "@flourish/scatter",
       bindings: { data: { name: [], x:0, color:1, filter:2, y:3, metadata:[4,5,6,7,8], size:9 } },
@@ -623,7 +622,7 @@ if (isScatter) {
       animate: false
     });
 
-    // 2) Layout update on the next frame
+    // 2) Update layout in next frame
     requestAnimationFrame(() => {
       graphs[id].flourish.update({
         state: {
@@ -642,7 +641,6 @@ if (isScatter) {
 
   return;
 }
-
 
     // --- Hierarchy ---
     const isHierarchy =
