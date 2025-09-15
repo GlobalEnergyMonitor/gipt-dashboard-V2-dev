@@ -349,17 +349,26 @@ function renderVisualisation() {
 
 function renderMap(id, selected) {
   const fullData = config.datasets[id];
+  const sel = selected.trim().toLowerCase();
 
-  let filtered = (selected.toLowerCase() === "world")
-    ? fullData
-    : fullData.filter(entry => {
-        const country = entry["Country/area"]?.trim().toLowerCase();
-        const regions = Array.isArray(entry["Region"])
-          ? entry["Region"].map(r => r.trim().toLowerCase())
-          : [];
-        return country === selected.trim().toLowerCase() ||
-               regions.includes(selected.trim().toLowerCase());
-      });
+  let filtered;
+
+  if (sel === "world" || sel === "g20") {
+    // ✅ World & G20 case: only keep plants above 50 MW
+    filtered = fullData.filter(entry => {
+      const cap = Number(entry["Capacity (MW)"]);
+      return !isNaN(cap) && cap >= 50;
+    });
+  } else {
+    // ✅ Country/region case: existing filter
+    filtered = fullData.filter(entry => {
+      const country = entry["Country/area"]?.trim().toLowerCase();
+      const regions = Array.isArray(entry["Region"])
+        ? entry["Region"].map(r => r.trim().toLowerCase())
+        : [];
+      return country === sel || regions.includes(sel);
+    });
+  }
 
   const headers = [
     "Plant / Project name","Capacity (MW)","Technology","Country/area",
@@ -382,11 +391,10 @@ function renderMap(id, selected) {
   const containerId = `chart-${id}`;
   const container = document.querySelector(`#${containerId}`);
 
-  // ✅ Hard reset: nuke any existing Flourish iframe
+  // Reset Flourish iframe
   const oldIframe = container.querySelector("iframe");
   if (oldIframe) oldIframe.remove();
 
-  // ✅ Now draw fresh map
   graphs[id] = graphs[id] || {};
   graphs[id].flourish = new Flourish.Live({
     template: "@flourish/time-map",
@@ -415,6 +423,7 @@ function renderMap(id, selected) {
     }
   });
 }
+
 
 function implentGraph(id) {
   graphs[id] = {};
