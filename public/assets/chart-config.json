@@ -59,19 +59,6 @@
         "filterable": true,
         "filter_by": "Country"
     },
-    "23185423": {
-        "title": "When is power capacity in development due to come online?",
-        "subtitle": "Power capacity in development by source and status, in gigawatts (GW)",
-        "x_axis": "Type",
-        "values": [
-            "Status","Starts"
-        ],
-        "dataset": "start_year_v1",
-        "initial_state": "World",
-        "filterable": true,
-        "filter_by": "Country",
-        "template": "@flourish/hierarchy"
-    },
     "23448121": {
         "title": "What is the age breakdown of operating power capacity?",
         "subtitle": "Capacity by age, in gigawatts (GW), with circles sized by proportion of total capacity per technology",
