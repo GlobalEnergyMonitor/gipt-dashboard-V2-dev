@@ -326,44 +326,26 @@ function updateGraphSummaries(selectedDisplay, summaryTextObj) {
     }
   });
 }
-function scheduleMapRender() {
-  const run = () => {
-    const mapId = "24167887";
-    if (!document.querySelector(`#chart-${mapId}`)) {
-      const container = document.createElement('div');
-      container.id = `chart-${mapId}`;
-      container.classList.add('chart-container', 'map-chart-container');
-      document.querySelector('.flourish-container').appendChild(container);
-    }
-    const selected = getSelectedText();
-    renderMap(mapId, selected);
-  };
 
-  if (window.requestIdleCallback) {
-    requestIdleCallback(run, { timeout: 1000 });
-  } else {
-    setTimeout(run, 300); // fallback for Safari/older
-  }
-}
 function renderVisualisation() {
   const graphIDs = config.dashboard.flourish_ids;
 
   graphIDs.forEach(id => {
-    if (String(id) === "24167887") return; // ⏸ skip map here
-
-    if (document.querySelector(`#chart-${id}`)) return; // prevent duplicates
+    if (document.querySelector(`#chart-${id}`)) return; // 🔑 prevent duplicates
 
     const container = document.createElement('div');
     container.id = `chart-${id}`;
     container.classList.add('chart-container');
+
+    if (String(id) === "24167887") {
+      container.classList.add('map-chart-container');
+    }
+
     document.querySelector('.flourish-container').appendChild(container);
 
     insertChartSummary(id);
     implentGraph(id);
   });
-
-  // ✅ defer map render
-  scheduleMapRender();
 }
 
 function renderMap(id, selected) {
